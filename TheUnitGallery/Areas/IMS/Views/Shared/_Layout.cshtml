@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title | The Unit Art Gallery</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="container-fluid">
+        @Html.Partial("_HeaderPartial")
+
+        @RenderBody()
+
+        @Html.Partial("_FooterPartial")
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/dropdowns")
+        @RenderSection("scripts", required: false)
+    </div>
+</body>
+</html>

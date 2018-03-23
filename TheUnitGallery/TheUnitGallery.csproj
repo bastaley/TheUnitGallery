@@ -191,8 +191,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\IMS\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\IMS\IMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -238,6 +241,12 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\IMS\Views\web.config" />
+    <Content Include="Areas\IMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\IMS\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\IMS\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\Shared\_IMSAdminNavPanel.cshtml" />
+    <Content Include="Areas\IMS\Views\Shared\_HeaderPartial.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\header.dropdown.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
@@ -312,6 +321,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\IMS\Models\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
