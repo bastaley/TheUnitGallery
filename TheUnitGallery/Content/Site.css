@@ -1,24 +1,372 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/********** GENERAL **********/
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #ECECEC;
+    color: #404040;
+    font-size: 16px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Lato', sans-serif;
+    color: inherit;
+    text-transform: uppercase;
+    margin-top: 20px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+h1, .h1 {
+    font-size: 34px;
+    font-weight: 900;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+h2, .h2 {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+h3, .h3 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+h4, .h4 {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+h5, .h5 {
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+a {
+    color: #404040;
+}
+
+    a:hover {
+        text-decoration: none;
+    }
+
+address {
+    font-size: 14px;
+}
+
+/********* HEADER / FOOTER **********/
+header, footer {
+    margin-bottom: 30px;
+}
+
+header {
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+header > div {
+    z-index: 500;
+    height: 60px;
+    line-height: 60px;
+    font-weight: bold;
+    border: 1px solid #ECECEC;
+    border-top: 0;
+    background-color: inherit;
+}
+
+    header > div + div {
+        border-right: 0;
+    }
+
+header p {
+    line-height: normal;
+    font-weight: 300;
+    text-transform: none;
+    font-size: 16px;
+    font-family: 'Open Sans',sans-serif;
+}
+
+footer > div {
+    border: 1px solid #ECECEC;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+    footer > div + div {
+        border-right: 0;
+    }
+
+/********** HEADER RESPONSIVE**********/
+
+@media (min-width:576px) {
+    header {
+        position: fixed;
+        top: 0;
+        z-index: 50;
+        width: 540px;
+    }
+
+        header.fluid {
+            width: 100%;
+            max-width: 1400px;
+        }
+
+    .body-content {
+        margin-top: 150px;
+    }
+
+        .body-content + .body-content {
+            margin-top: 0px;
+        }
+}
+
+@media (min-width:768px) {
+    header {
+        width: 720px;
+    }
+}
+
+@media (min-width:992px) {
+    header {
+        width: 960px;
+    }
+
+    .body-content {
+        margin-top: 90px;
+    }
+}
+
+@media (min-width:1200px) {
+    header {
+        width: 1140px;
+    }
+}
+
+.container-fluid {
+    max-width: 1400px;
+}
+/********** ACCOUNT MANAGEMENT / SEARCH **********/
+
+#account-btn:hover, #search-btn:hover {
+    cursor: pointer;
+}
+
+#account, #search {
+    z-index: 499;
+    width: 100%;
+    height: auto;
+    border-top: 1px solid #ECECEC;
+    border-bottom: 5px solid #404040;
+    padding: 15px;
+    background-color: #FFF;
+    transition: 1s;
+    display: none;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: none;
+}
+
+    #account.active, #search.active {
+        transition: 1s;
+        display: block;
+    }
+
+    #account.active {
+        position: absolute;
+        top: 180px;
+        z-index: 501;
+    }
+
+
+
+@media (min-width: 576px) {
+    #account, #search {
+        display: block;
+        border: 1px solid #ECECEC;
+        border-top: 0;
+        border-bottom: 5px solid #404040;
+        padding: 15px;
+        background-color: #FFF;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: 1s;
+    }
+
+        #account.active, #search.active {
+            top: auto;
+            -webkit-transform: translateY(100%);
+            -moz-transform: translateY(100%);
+            -o-transform: translateY(100%);
+            -ms-transform: translateY(100%);
+            transform: translateY(100%);
+            transition: 1s;
+            z-index: 499;
+        }
+}
+
+/********** ADVERTISING **********/
+footer, .ads {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+/********** THE UNIT CLASS STYLES **********/
+
+.content, .body-content {
+    background-color: #FFF;
+}
+
+.sub-heading {
+    padding: 0 15px 15px 30px;
+}
+
+.unit-site {
+    background-image: url('../Media/Uploads/the-unit.jpg');
+    background-size: 400px;
+}
+
+/********** UTILITY CLASSES **********/
+
+.author {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+}
+
+    .author:before {
+        content: "by ";
+    }
+
+.inverse {
+    background-color: #404040;
+    color: #FFF;
+}
+
+.white-space {
+    padding: 10px 50px 40px;
+}
+
+.no-inside-gutters > .col,
+.no-inside-gutters > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+
+/********** LOGO **********/
+
+.logo {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.nav-title {
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 60px;
+    margin: 0 -15px 0 -15px;
+    font-size: 34px;
+    font-weight: 900;
+    font-family: Lato, sans-serif;
+}
+
+.logo h1 {
+    line-height: 60px;
+    margin: 0;
+}
+
+.logo a {
+    font-family: 'Lato', sans-serif;
+    color: inherit;
+    text-transform: uppercase;
+    font-size: 34px;
+    font-weight: 900;
+    display: block;
+    margin: 0 0 0 -15px;
+    width: calc(100% + 30px);
+    height: 100%;
+}
+
+.tel a {
+    font-size: 27px;
+    font-weight: 900;
+}
+
+/********** NAVIGATION **********/
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+nav .nav-button {
+    height: 60px;
+    border: 1px solid #ECECEC;
+    line-height: 60px;
+    padding-left: 50px;
+    font-size: 20px;
+    font-family: 'Lato',sans-serif;
+}
+
+    nav .nav-button:after {
+        content: ">";
+        position: absolute;
+        right: 20px;
+    }
+
+/********** ADMIN NAVIGATION **********/
+
+.admin-nav ul {
+    padding: 0;
+}
+
+.admin-nav li {
+    list-style-type: none;
+    margin-left: -15px;
+    margin-right: -15px;
+    border: 1px solid #ECECEC;
+    border-left: 0;
+}
+
+    .admin-nav li a {
+        display: block;
+        width: 100%;
+        line-height: 40px;
+        padding-left: 15px;
+    }
+
+        .admin-nav li a:hover, .admin li a:active {
+            color: #FFF;
+        }
+
+    .admin-nav li:hover {
+        background-color: #797979;
+        border-right: #ECECEC;
+    }
+
+
+/********* MISC **********/
+
+
+.thumbnail {
+    width: 50px;
+    height: 50px;
+}
+
+.artist-profile {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ECECEC;
+    margin: 15px;
+}
+
+.temp-holder {
+    background-color: blue;
+    min-height: 462px;
 }

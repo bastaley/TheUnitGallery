@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNet.Identity
+
+<div class="row">
+    <div class="col-md-12 col-lg-4">
+        <h3>Content Management</h3>
+        <hr />
+        <p>Manage website content, products and prices.</p>
+        @Html.ActionLink("Access the CMS", "Index", "CMS", new { area = "CMS" }, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-12 col-lg-4">
+        <h3>Business Management</h3>
+        <hr />
+        <p>Manage customers, orders and viewings</p>
+        @Html.ActionLink("Access the IMS", "Index", "Dashboard", new { area = "IMS" }, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-12 col-lg-4">
+        @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Account Management</h3>
+            <hr />
+            <p>Hi @User.Identity.GetUserName(), </p>
+
+            @Html.ActionLink("Manage Staff Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-primary" })
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary">Log off</a>
+        }
+    </div>
+</div>
+

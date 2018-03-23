@@ -1,0 +1,10 @@
+﻿<div id="account">
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_ManageAccountPartial")
+    }
+    else
+    {
+        Html.RenderAction("_LoginPartial", "Login", new { });
+    }
+</div>
