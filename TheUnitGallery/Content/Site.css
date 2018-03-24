@@ -370,3 +370,22 @@ nav .nav-button {
     background-color: blue;
     min-height: 462px;
 }
+
+
+
+/*********IMS **********/
+
+.body-content {
+    padding-bottom: 15px;
+}
+
+
+/*************VALIDATION **************/
+
+.field-validation-error, .validation-summary-errors {
+    color: red;
+}
+
+.input-validation-error {
+    border: 2px solid red;
+}

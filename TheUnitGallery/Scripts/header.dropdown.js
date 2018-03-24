@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     $('#account-btn').click(function (e) {
         if ($('#search').hasClass('active')) {
             $('#search').removeClass('active');
