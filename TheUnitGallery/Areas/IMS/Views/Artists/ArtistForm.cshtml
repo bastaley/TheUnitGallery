@@ -1,0 +1,47 @@
+﻿@model TheUnitGallery.Areas.IMS.ViewModels.ArtistFormViewModel
+
+@using TheUnitGallery.Areas.IMS.ViewModels
+
+<div class="row body-content">
+    @Html.Partial("_IMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>@Model.Title</h3>
+                <hr />
+            </div>
+        </div>
+        @using (Html.BeginForm("Save", "Artists"))
+        {
+            @Html.ValidationSummary()
+            <div class="row">
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artist.FirstName)
+                        @Html.TextBoxFor(m => m.Artist.FirstName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artist.LastName)
+                        @Html.TextBoxFor(m => m.Artist.LastName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artist.Alias)
+                        @Html.TextBoxFor(m => m.Artist.Alias, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(m => m.Artist.Id)
+                        @Html.AntiForgeryToken()
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                <div class="col-sm-12 col-md-6">
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

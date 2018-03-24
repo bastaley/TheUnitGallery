@@ -2,16 +2,12 @@
 
 @using TheUnitGallery.Areas.IMS.ViewModels
 
-@{
-    ViewBag.Title = "CustomerForm";
-}
-
 <div class="row body-content">
     @Html.Partial("_IMSAdminNavPanel")
     <div class="col-sm-9 col-md-10">
         <div class="row">
             <div class="col-sm-12">
-                <h3>TITLE SHOULD BE GENERATED HERE</h3>
+                <h3>@Model.Title</h3>
                 <hr />
             </div>
         </div>

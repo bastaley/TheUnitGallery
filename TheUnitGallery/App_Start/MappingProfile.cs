@@ -16,6 +16,8 @@ namespace TheUnitGallery.App_Start
             {
                 cfg.CreateMap<Customer, CustomerDto>();
                 cfg.CreateMap<CustomerDto, Customer>();
+                cfg.CreateMap<Artist, ArtistDto>();
+                cfg.CreateMap<ArtistDto, Artist>();
             });
 
         }
