@@ -213,6 +213,7 @@
     <Compile Include="Areas\IMS\ViewModels\ArtistFormViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\AddressesController.cs" />
     <Compile Include="Controllers\API\ArtistsController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
     <Compile Include="Controllers\API\GenresController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Dtos\AddressDto.cs" />
     <Compile Include="Dtos\ArtistDto.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\GenreDto.cs" />
@@ -247,7 +249,16 @@
     <Compile Include="Migrations\201803250904269_AddMediumTableToDatabase.Designer.cs">
       <DependentUpon>201803250904269_AddMediumTableToDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803250934316_AddAddressTableToDatabase.cs" />
+    <Compile Include="Migrations\201803250934316_AddAddressTableToDatabase.Designer.cs">
+      <DependentUpon>201803250934316_AddAddressTableToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803250945542_AddNameColumnToAddressesTable.cs" />
+    <Compile Include="Migrations\201803250945542_AddNameColumnToAddressesTable.Designer.cs">
+      <DependentUpon>201803250945542_AddNameColumnToAddressesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -643,6 +654,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803250904269_AddMediumTableToDatabase.resx">
       <DependentUpon>201803250904269_AddMediumTableToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803250934316_AddAddressTableToDatabase.resx">
+      <DependentUpon>201803250934316_AddAddressTableToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803250945542_AddNameColumnToAddressesTable.resx">
+      <DependentUpon>201803250945542_AddNameColumnToAddressesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
