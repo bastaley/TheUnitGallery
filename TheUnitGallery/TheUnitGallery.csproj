@@ -216,12 +216,14 @@
     <Compile Include="Controllers\API\ArtistsController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
     <Compile Include="Controllers\API\GenresController.cs" />
+    <Compile Include="Controllers\API\MediumsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\ArtistDto.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\GenreDto.cs" />
+    <Compile Include="Dtos\MediumDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,10 +243,15 @@
     <Compile Include="Migrations\201803250713586_AddGenreTableToDatabase.Designer.cs">
       <DependentUpon>201803250713586_AddGenreTableToDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803250904269_AddMediumTableToDatabase.cs" />
+    <Compile Include="Migrations\201803250904269_AddMediumTableToDatabase.Designer.cs">
+      <DependentUpon>201803250904269_AddMediumTableToDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Medium.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
@@ -633,6 +640,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803250713586_AddGenreTableToDatabase.resx">
       <DependentUpon>201803250713586_AddGenreTableToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803250904269_AddMediumTableToDatabase.resx">
+      <DependentUpon>201803250904269_AddMediumTableToDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

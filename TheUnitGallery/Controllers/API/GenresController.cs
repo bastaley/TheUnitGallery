@@ -29,12 +29,12 @@ namespace TheUnitGallery.Controllers.API
         //GET /api/genres/1
         public IHttpActionResult GetGenre(int id)
         {
-            var Genre = _context.Genres.SingleOrDefault(c => c.Id == id);
+            var genre = _context.Genres.SingleOrDefault(c => c.Id == id);
 
-            if (Genre == null)
+            if (genre == null)
                 return NotFound();
 
-            return Ok(Mapper.Map<Genre, GenreDto>(Genre));
+            return Ok(Mapper.Map<Genre, GenreDto>(genre));
         }
 
         // POST /api/genres
