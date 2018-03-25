@@ -21,6 +21,7 @@ namespace TheUnitGallery.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Genre> Genres { get; set; }
         public DbSet<Artist> Artists { get; set; }
 
         public ApplicationDbContext()
