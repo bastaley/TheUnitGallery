@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TheUnitGallery.Models;
 using TheUnitGallery.Areas.IMS.ViewModels;
+using System.Data.Entity;
 
 namespace TheUnitGallery.Areas.IMS.Controllers
 {
@@ -38,7 +39,10 @@ namespace TheUnitGallery.Areas.IMS.Controllers
         // GET: IMS/Customers/Edit
         public ActionResult Edit(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers
+                .Include(c => c.BillingAddress)
+                .Include(c => c.ShippingAddress)
+                .SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return HttpNotFound();
@@ -49,6 +53,53 @@ namespace TheUnitGallery.Areas.IMS.Controllers
             };
 
             return View("CustomerForm", viewModel);
+        }
+
+        // GET: IMS/Customers/Addresses
+        public ActionResult Addresses(int id)
+        {
+            var customer = _context.Customers
+                .Include(c => c.BillingAddress)
+                .Include(c => c.ShippingAddress)
+                .Include(c => c.SavedAddresses)
+                .SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var viewModel = new AddressSelectionViewModel
+            {
+                CustomerId = id,
+                BillingAddress = customer.BillingAddress,
+                ShippingAddress = customer.ShippingAddress,
+                SavedAddresses = customer.SavedAddresses
+            };
+
+            return View("AddressSelection", viewModel);
+        }
+
+        // GET: IMS/Customers/SetBillingAddress
+        public ActionResult SetBillingAddress(int customerId, int addressId)
+        {
+            var customerInDb = _context.Customers.Single(c => c.Id == customerId);
+
+            customerInDb.BillingAddressId = addressId;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Edit", new { id = customerId });
+        }
+
+        // GET: IMS/Customers/SetShippingAddress
+        public ActionResult SetShippingAddress(int customerId, int addressId)
+        {
+            var customerInDb = _context.Customers.Single(c => c.Id == customerId);
+
+            customerInDb.ShippingAddressId = addressId;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Edit", new { id = customerId });
         }
 
         //POST:

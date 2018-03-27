@@ -25,5 +25,13 @@ namespace TheUnitGallery.Models
         public string MobileNumber { get; set; }
 
         public string Email { get; set; }
+
+        public Address BillingAddress { get; set; }
+        public int? BillingAddressId { get; set; }
+
+        public Address ShippingAddress { get; set; }
+        public int? ShippingAddressId { get; set; }
+
+        public virtual List<Address> SavedAddresses { get; set; }
     }
 }

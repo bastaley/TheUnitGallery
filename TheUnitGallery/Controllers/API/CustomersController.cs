@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -52,6 +53,34 @@ namespace TheUnitGallery.Controllers.API
             customerDto.Id = customer.Id;
 
             return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
+        }
+
+        //POST /api/customers/21/billing/1
+        public IHttpActionResult ChangeCustomerAddress (int customerId, string addressType, int addressId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var customerInDb = _context.Customers
+                .Include(c => c.SavedAddresses)
+                .SingleOrDefault();
+
+            //if (customerInDb == null)
+            //    return NotFound();
+
+            if (addressType == "billing")
+            {
+                customerInDb.BillingAddress = customerInDb.SavedAddresses.Find(a => a.Id == addressId);
+            }
+
+            if (addressType == "shipping")
+            {
+                customerInDb.ShippingAddress = customerInDb.SavedAddresses.Find(a => a.Id == addressId);
+            }
+
+            _context.SaveChanges();
+
+            return Ok();
         }
 
 

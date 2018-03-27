@@ -268,7 +268,7 @@ footer, .ads {
     text-transform: uppercase;
     line-height: 60px;
     margin: 0 -15px 0 -15px;
-    font-size: 34px;
+    font-size: 1em;
     font-weight: 900;
     font-family: Lato, sans-serif;
 }
@@ -389,4 +389,55 @@ nav .nav-button {
 
 .input-validation-error {
     border: 2px solid red;
+}
+
+
+/**********CUSTOMER ADDRESSES***********/
+
+.addresses-grid address {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ECECEC;
+    min-height: 170px;
+    margin-top: 20px;
+}
+
+.addresses-grid .billing address, .addresses-grid .shipping address {
+    background: #404040;
+    color: #fff;
+    transition: 1s;
+}
+
+    .addresses-grid address::before {
+        content: "Address Not In Use";
+        display: block;
+        font-weight: bold;
+    }
+
+    .addresses-grid .shipping address::before {
+        content: "Current Shipping Address";
+        display: block;
+        font-weight: bold;
+    }
+
+    .addresses-grid .billing address::before {
+        content: "Current Billing Address";
+        display: block;
+        font-weight: bold;
+    }
+
+    .addresses-grid .billing.shipping address::before {
+        content: "Current Billing & Shipping Address";
+        display: block;
+        font-weight: bold;
+    }
+
+.addresses-grid address:hover {
+    border: 1px solid #404040;
+    transition: 1s;
+}
+
+
+.button-wrapper {
+    margin-bottom: 5px;
 }

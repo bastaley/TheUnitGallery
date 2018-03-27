@@ -1,0 +1,88 @@
+﻿@model TheUnitGallery.Areas.IMS.ViewModels.AddressSelectionViewModel
+
+@{
+    ViewBag.Title = "Address Selection";
+}
+
+<div class="row body-content">
+    @Html.Partial("_IMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h3>@ViewBag.Title</h3>
+        <hr />
+        <input type="button" value="Add New Address" class="btn btn-primary" onclick="location.href='@Url.Action("New", "Addresses", new {customerId = Model.CustomerId})'" />
+        <input type="button" value="Back To Customer" class="btn btn-success" onclick="location.href='@Url.Action("Edit", "Customers", new {Id = Model.CustomerId})'" />
+        <div class="row addresses-grid">
+            @foreach (var address in Model.SavedAddresses)
+        {
+            var className = "";
+
+
+            if (address == Model.BillingAddress)
+            {
+                className += "billing ";
+            }
+
+            if (address == Model.ShippingAddress)
+            {
+                className += "shipping ";
+            }
+            <div class="col-md-4 address @className">
+                @Html.Partial("_AddressPartial", address)
+                <div class="button-wrapper">
+                    <button class='btn btn-primary btn-sm js-set-address' data-address-type="billing" data-address-id="@address.Id" data-customer-id="@Model.CustomerId">Set As Billing Address</button>
+                    <button class='btn btn-primary btn-sm js-set-address' data-address-type="shipping" data-address-id="@address.Id" data-customer-id="@Model.CustomerId">Set As Shipping Address</button>
+                </div>
+
+                <input type="button" value="Edit Address" class="btn btn-outline-secondary btn-sm" onclick="location.href='@Url.Action("Edit", "Addresses", new {Id = address.Id, customerId = Model.CustomerId})'" />
+                <button class='btn btn-outline-danger btn-sm js-delete' data-address-id="@address.Id">Delete Address</button>
+            </div>
+    }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".addresses-grid").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this address?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/addresses/" + button.attr("data-address-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents(".address").remove()
+                            }
+                        });
+                    }
+                });
+            });
+
+            $(".addresses-grid").on("click", ".js-set-address", function () {
+                var button = $(this);
+
+                        $.ajax({
+                            url: "/api/customers/" + button.attr("data-customer-id") + "/" + button.attr("data-address-type") + "/" + button.attr("data-address-id"),
+                            method: "POST",
+                            success: function () {
+                                if (button.attr("data-address-type") == "billing") {
+                                    $(".billing").removeClass("billing")
+                                    button.parents(".address").addClass("billing")
+                                }
+                                else {
+                                    $(".shipping").removeClass("shipping")
+                                    button.parents(".address").addClass("shipping")
+                                }
+                                
+                            }
+                        });
+                    
+                
+            });
+
+        });
+    </script>
+}

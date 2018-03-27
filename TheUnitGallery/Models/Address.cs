@@ -14,7 +14,7 @@ namespace TheUnitGallery.Models
 
         [Required]
         public string AddressLine1 { get; set; }
-        public string AdressLine2 { get; set; }
+        public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }
 
         [Required]

@@ -1,0 +1,28 @@
+﻿@model TheUnitGallery.Models.Address
+
+<address>
+    @if (Model.Name != null)
+    {
+        @Model.Name
+        @Html.Raw("<br />")
+    }
+
+    @Model.AddressLine1<br />
+
+    @if (Model.AddressLine2 != null)
+    {
+        @Model.AddressLine2
+        @Html.Raw("<br />")
+    }
+
+    @if (Model.AddressLine3 != null)
+    {
+        @Model.AddressLine3
+        @Html.Raw("<br />")
+    }
+
+    @Model.City<br />
+    @Model.County<br />
+    @Model.PostCode<br />
+    @Model.Country
+</address>

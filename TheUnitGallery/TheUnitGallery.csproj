@@ -206,10 +206,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\IMS\Controllers\AddressesController.cs" />
     <Compile Include="Areas\IMS\Controllers\ArtistsController.cs" />
     <Compile Include="Areas\IMS\Controllers\CustomersController.cs" />
     <Compile Include="Areas\IMS\Controllers\DashboardController.cs" />
     <Compile Include="Areas\IMS\IMSAreaRegistration.cs" />
+    <Compile Include="Areas\IMS\ViewModels\AddressFormViewModel.cs" />
+    <Compile Include="Areas\IMS\ViewModels\AddressSelectionViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\ArtistFormViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -256,6 +259,18 @@
     <Compile Include="Migrations\201803250945542_AddNameColumnToAddressesTable.cs" />
     <Compile Include="Migrations\201803250945542_AddNameColumnToAddressesTable.Designer.cs">
       <DependentUpon>201803250945542_AddNameColumnToAddressesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803251039254_AddBillingAndShippingAddressColumnsToCustomerTable.cs" />
+    <Compile Include="Migrations\201803251039254_AddBillingAndShippingAddressColumnsToCustomerTable.Designer.cs">
+      <DependentUpon>201803251039254_AddBillingAndShippingAddressColumnsToCustomerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803251058312_UpdateAddressLine2ColumnInAddressTableTypo.cs" />
+    <Compile Include="Migrations\201803251058312_UpdateAddressLine2ColumnInAddressTableTypo.Designer.cs">
+      <DependentUpon>201803251058312_UpdateAddressLine2ColumnInAddressTableTypo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803251119070_AddCustomer_IdToAddressesTable.cs" />
+    <Compile Include="Migrations\201803251119070_AddCustomer_IdToAddressesTable.Designer.cs">
+      <DependentUpon>201803251119070_AddCustomer_IdToAddressesTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -553,6 +568,9 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Areas\IMS\Views\Artists\Index.cshtml" />
     <Content Include="Areas\IMS\Views\Artists\ArtistForm.cshtml" />
+    <Content Include="Areas\IMS\Views\Customers\AddressSelection.cshtml" />
+    <Content Include="Areas\IMS\Views\Shared\_AddressPartial.cshtml" />
+    <Content Include="Areas\IMS\Views\Addresses\AddressForm.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -660,6 +678,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803250945542_AddNameColumnToAddressesTable.resx">
       <DependentUpon>201803250945542_AddNameColumnToAddressesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803251039254_AddBillingAndShippingAddressColumnsToCustomerTable.resx">
+      <DependentUpon>201803251039254_AddBillingAndShippingAddressColumnsToCustomerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803251058312_UpdateAddressLine2ColumnInAddressTableTypo.resx">
+      <DependentUpon>201803251058312_UpdateAddressLine2ColumnInAddressTableTypo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803251119070_AddCustomer_IdToAddressesTable.resx">
+      <DependentUpon>201803251119070_AddCustomer_IdToAddressesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
