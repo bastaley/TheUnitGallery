@@ -63,10 +63,10 @@ namespace TheUnitGallery.Controllers.API
 
             var customerInDb = _context.Customers
                 .Include(c => c.SavedAddresses)
-                .SingleOrDefault();
+                .SingleOrDefault(c => c.Id == customerId);
 
-            //if (customerInDb == null)
-            //    return NotFound();
+            if (customerInDb == null)
+                return NotFound();
 
             if (addressType == "billing")
             {
