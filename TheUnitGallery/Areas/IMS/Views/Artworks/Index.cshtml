@@ -1,0 +1,111 @@
+﻿@using TheUnitGallery.Models
+
+@{
+    ViewBag.Title = "Artwork Management";
+}
+
+<div class="row body-content">
+    @Html.Partial("_IMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h3>@ViewBag.Title</h3>
+        <hr />
+        @Html.ActionLink("Add New Artwork", "New", "Artworks", new { area = "IMS" }, new { @class = "btn btn-outline-success" })
+        <hr />
+        <table class="table table-striped" id="artworks">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                    <th>Medium</th>
+                    <th>Sales Price</th>
+                    <th>Status</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#artworks").DataTable({
+                ajax: {
+                    url: "/api/artworks",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "title",
+                        render: function (data, type, artwork) {
+                            return "<a href='artworks/edit/" + artwork.id + "'>" + data + "</a>";
+                        }
+                    },
+                    {
+                        data: "artist",
+                        render: function (data, type, artist) {
+                            return data.firstName + " " + data.lastName;
+                        }
+                    },
+                    {
+                        data: "genre",
+                        render: function (data, type, genre) {
+                            return data.name;
+                        }
+                    },
+                    {
+                        data: "medium",
+                        render: function (data, type, medium) {
+                            return data.name;
+                        }
+                    },
+                    {
+                        data: "salesPrice",
+                        render: function (data) {
+                            return "£"+data;
+                        }
+                    },
+                    {
+                        data: "artworkStatus",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn btn-outline-danger btn-sm js-delete' data-artwork-id='" + data + "'>Delete</button>";
+                        }
+                    },
+                ]
+
+
+            });
+
+            $("#artworks").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this artwork?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/artworks/" + button.attr("data-artwork-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw()
+
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+

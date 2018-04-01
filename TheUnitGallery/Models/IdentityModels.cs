@@ -25,9 +25,12 @@ namespace TheUnitGallery.Models
 
         public DbSet<Address> Address { get; set; }
 
+        public DbSet<Artwork> Artworks { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Medium> Mediums { get; set; }
-        
+
+        public DbSet<Interaction> Interactions { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

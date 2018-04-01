@@ -18,6 +18,8 @@ namespace TheUnitGallery.App_Start
                 cfg.CreateMap<CustomerDto, Customer>();
                 cfg.CreateMap<Artist, ArtistDto>();
                 cfg.CreateMap<ArtistDto, Artist>();
+                cfg.CreateMap<Artwork, ArtworkDto>();
+                cfg.CreateMap<ArtworkDto, Artwork>();
                 cfg.CreateMap<Genre, GenreDto>();
                 cfg.CreateMap<GenreDto, Genre>();
                 cfg.CreateMap<Medium, MediumDto>();

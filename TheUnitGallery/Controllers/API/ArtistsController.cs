@@ -37,7 +37,7 @@ namespace TheUnitGallery.Controllers.API
                 return Ok(Mapper.Map<Artist, ArtistDto>(artist));
             }
 
-            // POST /api/customers
+            // POST /api/artists
             [HttpPost]
             public IHttpActionResult CreateArtist(ArtistDto artistDto)
             {

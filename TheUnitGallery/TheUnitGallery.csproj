@@ -208,16 +208,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\IMS\Controllers\AddressesController.cs" />
     <Compile Include="Areas\IMS\Controllers\ArtistsController.cs" />
+    <Compile Include="Areas\IMS\Controllers\ArtworksController.cs" />
     <Compile Include="Areas\IMS\Controllers\CustomersController.cs" />
     <Compile Include="Areas\IMS\Controllers\DashboardController.cs" />
     <Compile Include="Areas\IMS\IMSAreaRegistration.cs" />
     <Compile Include="Areas\IMS\ViewModels\AddressFormViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\AddressSelectionViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\ArtistFormViewModel.cs" />
+    <Compile Include="Areas\IMS\ViewModels\ArtworkFormViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\AddressesController.cs" />
     <Compile Include="Controllers\API\ArtistsController.cs" />
+    <Compile Include="Controllers\API\ArtworksController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
     <Compile Include="Controllers\API\GenresController.cs" />
     <Compile Include="Controllers\API\MediumsController.cs" />
@@ -226,6 +229,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\AddressDto.cs" />
     <Compile Include="Dtos\ArtistDto.cs" />
+    <Compile Include="Dtos\ArtworkDto.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MediumDto.cs" />
@@ -272,11 +276,42 @@
     <Compile Include="Migrations\201803251119070_AddCustomer_IdToAddressesTable.Designer.cs">
       <DependentUpon>201803251119070_AddCustomer_IdToAddressesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803271856348_AddArtworksTableToDatabase.cs" />
+    <Compile Include="Migrations\201803271856348_AddArtworksTableToDatabase.Designer.cs">
+      <DependentUpon>201803271856348_AddArtworksTableToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804010800127_UpdateArtworksTableToTakeForeignIds.cs" />
+    <Compile Include="Migrations\201804010800127_UpdateArtworksTableToTakeForeignIds.Designer.cs">
+      <DependentUpon>201804010800127_UpdateArtworksTableToTakeForeignIds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011549172_UpdateArtworkDateTimeToDateTime2.cs" />
+    <Compile Include="Migrations\201804011549172_UpdateArtworkDateTimeToDateTime2.Designer.cs">
+      <DependentUpon>201804011549172_UpdateArtworkDateTimeToDateTime2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011628253_UpdateArtworkDateTimetoString.cs" />
+    <Compile Include="Migrations\201804011628253_UpdateArtworkDateTimetoString.Designer.cs">
+      <DependentUpon>201804011628253_UpdateArtworkDateTimetoString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011633437_UpdateArtworkTearLengthMaxTo4.cs" />
+    <Compile Include="Migrations\201804011633437_UpdateArtworkTearLengthMaxTo4.Designer.cs">
+      <DependentUpon>201804011633437_UpdateArtworkTearLengthMaxTo4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011727525_UpdateArtworkTableRequiredFields.cs" />
+    <Compile Include="Migrations\201804011727525_UpdateArtworkTableRequiredFields.Designer.cs">
+      <DependentUpon>201804011727525_UpdateArtworkTableRequiredFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011856157_AddInteractionTableToDatabase.cs" />
+    <Compile Include="Migrations\201804011856157_AddInteractionTableToDatabase.Designer.cs">
+      <DependentUpon>201804011856157_AddInteractionTableToDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\Artwork.cs" />
+    <Compile Include="Models\ArtworkStatus.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Interaction.cs" />
     <Compile Include="Models\Medium.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -571,6 +606,8 @@
     <Content Include="Areas\IMS\Views\Customers\AddressSelection.cshtml" />
     <Content Include="Areas\IMS\Views\Shared\_AddressPartial.cshtml" />
     <Content Include="Areas\IMS\Views\Addresses\AddressForm.cshtml" />
+    <Content Include="Areas\IMS\Views\Artworks\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\Artworks\ArtworkForm.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -645,7 +682,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\IMS\Models\" />
-    <Folder Include="Areas\IMS\Views\Artist\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
@@ -687,6 +723,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803251119070_AddCustomer_IdToAddressesTable.resx">
       <DependentUpon>201803251119070_AddCustomer_IdToAddressesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803271856348_AddArtworksTableToDatabase.resx">
+      <DependentUpon>201803271856348_AddArtworksTableToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804010800127_UpdateArtworksTableToTakeForeignIds.resx">
+      <DependentUpon>201804010800127_UpdateArtworksTableToTakeForeignIds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011549172_UpdateArtworkDateTimeToDateTime2.resx">
+      <DependentUpon>201804011549172_UpdateArtworkDateTimeToDateTime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011628253_UpdateArtworkDateTimetoString.resx">
+      <DependentUpon>201804011628253_UpdateArtworkDateTimetoString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011633437_UpdateArtworkTearLengthMaxTo4.resx">
+      <DependentUpon>201804011633437_UpdateArtworkTearLengthMaxTo4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011727525_UpdateArtworkTableRequiredFields.resx">
+      <DependentUpon>201804011727525_UpdateArtworkTableRequiredFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011856157_AddInteractionTableToDatabase.resx">
+      <DependentUpon>201804011856157_AddInteractionTableToDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -58,8 +58,8 @@ namespace TheUnitGallery.Controllers.API
         // PUT /api/genres/1
         public IHttpActionResult UpdateGenre(int id, GenreDto genreDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
+            //if (!ModelState.IsValid)
+            //    return BadRequest();
 
             var genreInDb = _context.Genres.SingleOrDefault(c => c.Id == id);
 
