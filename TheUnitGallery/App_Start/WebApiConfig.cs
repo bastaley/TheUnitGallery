@@ -24,6 +24,12 @@ namespace TheUnitGallery
             );
 
             config.Routes.MapHttpRoute(
+                "Interactions",
+                "API/interactions/{customerId}/{interactionId}",
+                new { controller = "Interactions", customerId = RouteParameter.Optional, interactionId = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

@@ -11,71 +11,106 @@
                 <hr />
             </div>
         </div>
-        @using (Html.BeginForm("Save", "Customers"))
+        @if (Model.Customer.Id != 0)
         {
-            @Html.ValidationSummary()
-            <div class="row">
-
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Customer.FirstName)
-                        @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Customer.LastName)
-                        @Html.TextBoxFor(m => m.Customer.LastName, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Customer.PhoneNumber)
-                        @Html.TextBoxFor(m => m.Customer.PhoneNumber, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Customer.MobileNumber)
-                        @Html.TextBoxFor(m => m.Customer.MobileNumber, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Customer.Email)
-                        @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.HiddenFor(m => m.Customer.Id)
-                        @Html.AntiForgeryToken()
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-                <div class="col-sm-12 col-md-6">
-
-                    @if (Model.Customer.Id != 0)
-                    {
-                        <h3>Shipping Address</h3>
-                        if (Model.Customer.ShippingAddress != null)
-                        {
-                            @Html.Partial("_AddressPartial", Model.Customer.ShippingAddress)
-
-                        }
-                        else
-                        {
-                            <p>Manage addresses to add a shipping address</p>
-                        }
-                        <h3>Billing Address</h3>
-                        if (Model.Customer.BillingAddress != null)
-                        {
-
-
-                            @Html.Partial("_AddressPartial", Model.Customer.BillingAddress)
-                        }
-                        else
-                        {
-                            <p>Manage addresses to add a billing address</p>
-                        }
-                        <input type="button" value="Manage Addresses" class="btn btn-outline-primary" onclick="location.href='@Url.Action("Addresses", "Customers", new {id = Model.Customer.Id})'" />
-                    }
-
-                </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#profile-panel" role="tab">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#interaction-panel" role="tab">Interaction Log</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#order-panel" role="tab">Orders</a>
+                    </li>
+                </ul>
             </div>
+        </div>
         }
+
+        <div class="tab-content">
+            <div class="tab-pane fade in show active" id="profile-panel" role="tabpanel">
+                @Html.Partial("_CustomerProfilePanelPartial", Model)
+            </div>
+            <div class="tab-pane fade" id="interaction-panel" role="tabpanel">
+                @Html.Partial("_CustomerInteractionsPanelPartial", Model.Customer)
+            </div>
+            <div class="tab-pane fade" id="order-panel" role="tabpanel">
+                <p>Orders will go here</p>
+            </div>
+        </div>
     </div>
 </div>
 
 
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#interactions").DataTable({
+                "order": [[2, "desc"]],
+                ajax: {
+                    url: "/api/interactions/" + $("#interactions").attr("data-customer-id") + "/",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "description",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "staff.userName",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "date",
+                        render: function (data) {
+                            return data;
+                        }
+                    }
+                ]
+            });
+
+            $("#log-interaction").on("click", function () {
+                var button = $(this);
+
+
+                var description = $("#interaction").val();
+                var customerId = button.attr("data-customer-id");
+                var staffId = button.attr("data-staff-id");
+
+                if (description != "") {
+                    var newInteraction = {
+                        customerId: customerId,
+                        staffId: staffId,
+                        description: description,
+                    };
+
+                    $.ajax({
+                        method: "POST",
+                        url: "/api/interactions/",
+                        contentType: "application/json",
+                        data: JSON.stringify(newInteraction),
+                        success: function () {
+                            bootbox.alert("Interaction was succesfully logged");
+                            $("#interaction").val("");
+                            table.ajax.reload();
+                        }
+                    });
+                }
+            });
+
+            
+        });
+    </script>
+}
 

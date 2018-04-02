@@ -14,7 +14,7 @@ namespace TheUnitGallery.Areas.IMS.ViewModels
             get
             {
                 if (Customer != null && Customer.Id != 0)
-                    return "Update " + Customer.FirstName + " " + Customer.LastName;
+                    return "Manage " + Customer.FirstName + " " + Customer.LastName;
 
                 return "Add New Customer";
             }

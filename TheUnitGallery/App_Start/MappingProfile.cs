@@ -26,6 +26,8 @@ namespace TheUnitGallery.App_Start
                 cfg.CreateMap<MediumDto, Medium>();
                 cfg.CreateMap<Address, AddressDto>();
                 cfg.CreateMap<AddressDto, Address>();
+                cfg.CreateMap<Interaction, InteractionDto>();
+                cfg.CreateMap<InteractionDto, Interaction>();
             });
 
         }

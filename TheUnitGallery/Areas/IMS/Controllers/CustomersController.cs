@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TheUnitGallery.Models;
 using TheUnitGallery.Areas.IMS.ViewModels;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 namespace TheUnitGallery.Areas.IMS.Controllers
 {
@@ -117,7 +118,7 @@ namespace TheUnitGallery.Areas.IMS.Controllers
                 return View("CustomerForm", viewModel);
             }
 
-            if(customer.Id == 0)
+            if (customer.Id == 0)
                 _context.Customers.Add(customer);
             else
             {
@@ -128,11 +129,29 @@ namespace TheUnitGallery.Areas.IMS.Controllers
                 customerInDb.PhoneNumber = customer.PhoneNumber;
                 customerInDb.MobileNumber = customer.MobileNumber;
                 customerInDb.Email = customer.Email;
+                
             }
 
             _context.SaveChanges();
 
+            LogInteraction(customer.Id, "Users Profile Was Updated");
+
             return RedirectToAction("Index");
+        }
+
+        //Log Interaction
+        public void LogInteraction(int customerId, string description)
+        {
+            var interaction = new Interaction
+            {
+                CustomerId = customerId,
+                StaffId = User.Identity.GetUserId(),
+                Description = description,
+                Date = DateTime.Now
+            };
+
+            _context.Interactions.Add(interaction);
+            _context.SaveChanges();
         }
 
     }

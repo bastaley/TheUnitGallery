@@ -441,3 +441,7 @@ nav .nav-button {
 .button-wrapper {
     margin-bottom: 5px;
 }
+
+table {
+    width: 100% !important;
+}

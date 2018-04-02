@@ -1,0 +1,15 @@
+﻿@model TheUnitGallery.Models.Customer
+
+@using Microsoft.AspNet.Identity;
+
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Log a Customer Interaction</h3>
+        <div class="form-group">
+            @Html.TextArea("interaction", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <button type="button" id="log-interaction" data-staff-id="@User.Identity.GetUserId()" data-customer-id="@Model.Id" class="btn btn-outline-primary btn-sm">Log Interaction</button>
+        </div>
+    </div>
+</div>
