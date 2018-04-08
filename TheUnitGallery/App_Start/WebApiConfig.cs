@@ -19,6 +19,12 @@ namespace TheUnitGallery
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                "StaffUsers",
+                "API/users/staff/",
+                new { controller = "Users", action = "GetStaffUsers" }
+            );
+
+            config.Routes.MapHttpRoute(
                 "InvoiceOrder",
                 "API/orders/invoice/{Id}",
                 new { controller = "Orders", action = "InvoiceOrder" }
