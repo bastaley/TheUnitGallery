@@ -18,6 +18,7 @@
                     <th>Phone Number</th>
                     <th>Mobile Number</th>
                     <th>Email</th>
+                    <th>Add Order</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -64,7 +65,13 @@
                             return data;
                         }
                     },
-                                        {
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<a href='orders/create/" + data + "'  class='btn btn-outline-primary btn-sm js-add-order'>Add Order</a>";
+                        }
+                    },
+                    {
                         data: "id",
                         render: function (data) {
                             return "<button class='btn btn-outline-danger btn-sm js-delete' data-customer-id='" + data + "'>Delete</button>";

@@ -28,5 +28,35 @@ namespace TheUnitGallery.Models
 
         [Required]
         public string Country { get; set; }
+
+        public string getAddressHTML()
+        {
+            var address = "<address>";
+
+            if (!string.IsNullOrWhiteSpace(AddressLine1))
+                address += AddressLine1 + "<br />";
+
+            if (!string.IsNullOrWhiteSpace(AddressLine2))
+                address += AddressLine2 + "<br />";
+
+            if (!string.IsNullOrWhiteSpace(AddressLine3))
+                address += AddressLine3 + "<br />";
+
+            if (!string.IsNullOrWhiteSpace(City))
+                address += City + "<br />";
+
+            if (!string.IsNullOrWhiteSpace(County))
+                address += County + "<br />";
+
+            if (!string.IsNullOrWhiteSpace(PostCode))
+                address += PostCode + "<br />";
+
+            if (!string.IsNullOrWhiteSpace(Country))
+                address += Country;
+
+            address += "</address>";
+
+            return address;
+        }
     }
 }

@@ -1,0 +1,220 @@
+﻿@model TheUnitGallery.Areas.IMS.ViewModels.CreateOrderViewModel
+
+<div class="row body-content">
+    @Html.Partial("_IMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h3>Edit Order</h3><hr />
+        <div class="row">
+            <div class="col-sm-4">
+                <p>Editing order for <strong>@Model.Customer.FullName</strong></p>
+                <p>Account Number: <strong>@Model.Customer.Id</strong></p>
+                <p>Order Number: <strong>@Model.Order.Id</strong></p>
+                <p>Date: <strong>@Model.Order.Date</strong></p>
+            </div>
+            <div class="col-sm-4">
+                <h3>Shipping Address</h3>
+                @Html.Raw(Model.Order.ShippingAddress)
+            </div>
+            <div class="col-sm-4">
+                <h3>Billing Address</h3>
+                @Html.Raw(Model.Order.BillingAddress)
+            </div>
+        </div>
+        <hr />
+        <h4>Order Items</h4>
+
+        <hr />
+        <table class="table table-striped" id="order-artworks">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <hr />
+        <div id="div-add-items" class="hide">
+            <h4>Add Items to Order</h4>
+            <hr />
+            <table class="table table-striped" id="artworks">
+
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Genre</th>
+                        <th>Medium</th>
+                        <th>Sales Price</th>
+                        <th>Status</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+           </div>
+
+
+            @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.Order.CustomerId)
+                    @Html.HiddenFor(m => m.Order.BillingAddress)
+                    @Html.HiddenFor(m => m.Order.ShippingAddress)
+                </div>
+                <div class="form-group">
+                    <button type="button" id="btn-add-items" class="btn btn-outline-success">Add Items to Order</button>
+                    @Html.ActionLink("View Ammended Invoice", "Details", new { id = Model.Order.Id}, new { @class="btn btn-outline-primary"})
+                </div>
+            </div>
+    }
+
+        </div>
+    </div>
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+
+            var orderTable = $("#order-artworks").DataTable({
+                ajax: {
+                    url: "/api/orders/items/" + @Model.Order.Id,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "title",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "artist",
+                        render: function (data, type, artist) {
+                            return data.fullName;
+                        }
+                    },
+                    {
+                        data: "salesPrice",
+                        render: function (data) {
+                            return "£" + data;
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn btn-outline-danger btn-sm js-remove-from-order' data-order-id='@Model.Order.Id' data-artwork-id='" + data + "'>Remove From Order</button>";
+                        }
+                    },
+                ]
+            });
+
+
+            var artworksTable = $("#artworks").DataTable({
+                ajax: {
+                    url: "/api/artworks",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "title",
+                        render: function (data, type, artwork) {
+                            return "<a href='@Url.Content("~/IMS/artworks/edit/")" + artwork.id + "'>" + data + "</a>";
+                        }
+                    },
+                    {
+                        data: "artist",
+                        render: function (data, type, artist) {
+                            return data.firstName + " " + data.lastName;
+                        }
+                    },
+                    {
+                        data: "genre",
+                        render: function (data, type, genre) {
+                            return data.name;
+                        }
+                    },
+                    {
+                        data: "medium",
+                        render: function (data, type, medium) {
+                            return data.name;
+                        }
+                    },
+                    {
+                        data: "salesPrice",
+                        render: function (data) {
+                            return "£" + data;
+                        }
+                    },
+                    {
+                        data: "artworkStatus",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn btn-outline-primary btn-sm js-add-to-order' data-order-id='@Model.Order.Id' data-artwork-id='" + data + "'>Add To Order</button>";
+                        }
+                    },
+                ]
+
+
+            });
+
+            $("#btn-add-items").on("click", function () {
+                var button = $(this);
+
+                $("#div-add-items").toggleClass("hide");
+            });
+
+            $("#artworks").on("click", ".js-add-to-order", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to add this artwork to the order?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/orders/add/" + button.attr("data-order-id") + "/" + button.attr("data-artwork-id"),
+                            method: "POST",
+                            success: function () {
+                                console.log("Success");
+                                orderTable.ajax.reload();
+                                artworksTable.ajax.reload();
+                            }
+                        });
+                    }
+                });
+            });
+
+            $("#order-artworks").on("click", ".js-remove-from-order", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to remove this artwork from the order?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/orders/remove/" + button.attr("data-order-id") + "/" + button.attr("data-artwork-id"),
+                            method: "POST",
+                            success: function () {
+                                console.log("Success");
+                                orderTable.ajax.reload();
+                                artworksTable.ajax.reload();
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+
+</script>
+
+}

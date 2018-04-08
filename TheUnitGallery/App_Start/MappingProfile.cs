@@ -28,6 +28,8 @@ namespace TheUnitGallery.App_Start
                 cfg.CreateMap<AddressDto, Address>();
                 cfg.CreateMap<Interaction, InteractionDto>();
                 cfg.CreateMap<InteractionDto, Interaction>();
+                cfg.CreateMap<Order, OrderDto>();
+                cfg.CreateMap<OrderDto, Order>();
             });
 
         }

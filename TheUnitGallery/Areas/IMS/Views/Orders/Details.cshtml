@@ -1,0 +1,146 @@
+﻿@model TheUnitGallery.Models.Order
+
+@using TheUnitGallery.Models;
+
+<div class="row body-content">
+    @Html.Partial("_IMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h3>Order Number: @Model.Id</h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Shipping Address</h3>
+                @Html.Raw(Model.ShippingAddress)
+            </div>
+            <div class="col-md-4">
+                <h3>Billing Address</h3>
+                @Html.Raw(Model.BillingAddress)
+            </div>
+            <div class="col-md-4">
+                <span class="h1">INVOICE TOTAL</span>
+                <br />
+                <span class="h1">£   @((Model.TotalPrice * 1.2).ToString("0.00"))</span>
+                <hr />
+                @if (Model.OrderStatus == OrderStatus.Open)
+    {
+            <p class="h3" id="order-status">Order Status: Open</p>
+            <hr />
+            @Html.ActionLink("Edit Order", "Edit", new { id = Model.Id }, new { @class = "btn btn-outline-primary", id = "Edit-Order" })
+            <button type="button" class="btn btn-outline-primary" data-order-number="@Model.Id" id="js-invoice-order">Invoice</button>
+            <button type="button" class="btn btn-outline-danger" data-order-number="@Model.Id" id="js-cancel-order">Cancel</button>
+            <hr />
+}
+else if (Model.OrderStatus == OrderStatus.Invoiced)
+{
+            <p class="h3" id="order-status">Order Status: Invoiced</p>
+            <hr />
+            <button type="button" class="btn btn-outline-primary" data-order-number="@Model.Id" id="js-pay-order">Payment Received</button>
+            <button type="button" class="btn btn-outline-danger" data-order-number="@Model.Id" id="js-cancel-order">Cancel</button>
+            <hr />
+}
+else if (Model.OrderStatus == OrderStatus.Paid)
+{
+            <p class="h3 text-success" id="order-status">Order Status: Paid</p>
+            <hr />
+}
+else
+{
+            <p class="h3 text-danger" id="order-status">Order Status: Cancelled</p>
+            <hr />
+}
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>By Artist</th>
+                    <th>Individual Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var artwork in Model.OrderItems)
+                {
+                    <tr>
+                        <td>@artwork.Title</td>
+                        <td>@artwork.Artist.FullName</td>
+                        <td>£@string.Format("{0:n2}", artwork.SalesPrice)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-sm-4 offset-8">
+                <hr />
+                <p class="h4">Subtotal:<span class="h3"> £@Model.TotalPrice.ToString("0.00")</span></p>
+                <p class="h4">Tax:<span class="h3">£@((Model.TotalPrice * 0.2).ToString("0.00"))</span></p>
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+<script>
+        $(document).ready(function () {
+            $("#js-invoice-order").on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to invoice this order?", function (result) {
+                    if (result) {
+                                            $.ajax({
+                        method: "POST",
+                        url: "/api/orders/invoice/" + @Model.Id,
+                        contentType: "application/json",
+                        success: function () {
+
+                            var r = $('<button type="button" id="js-pay-order" class="btn btn-outline-primary">Payment Recieved</button>');
+                            r.insertAfter(button);
+                            $("#Edit-Order").remove();
+                            $("#js-invoice-order").remove();
+                            $("#order-status").text("Order Status: Invoiced")
+                        }
+                    });
+                    }
+                });
+            });
+            $("body").on("click", "#js-pay-order", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to pay this order?", function (result) {
+                    if (result) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/api/orders/pay/" + @Model.Id,
+                        contentType: "application/json",
+                        success: function () {
+                            $("#order-status").text("Order Status: Paid").addClass("text-success").addClass("h2")
+                            $("#js-pay-order").remove();
+                            $("#js-cancel-order").remove();
+
+                        }
+                        });
+                    }
+                });
+            });
+            $("body").on("click", "#js-cancel-order", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to cancel this order?", function (result) {
+                    if (result) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/api/orders/cancel/" + @Model.Id,
+                        contentType: "application/json",
+                        success: function () {
+                            $("#order-status").text("Order Status: Cancelled").addClass("text-danger").addClass("h2")
+                            $("#Edit-Order").remove();
+                            $("#js-invoice-order").remove();
+                            $("#js-pay-order").remove();
+                            $("#js-cancel-order").remove();
+                        }
+                        });
+                    }
+                });
+            });
+        });
+</script>
+}

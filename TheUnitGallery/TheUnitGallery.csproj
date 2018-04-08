@@ -211,11 +211,13 @@
     <Compile Include="Areas\IMS\Controllers\ArtworksController.cs" />
     <Compile Include="Areas\IMS\Controllers\CustomersController.cs" />
     <Compile Include="Areas\IMS\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\IMS\Controllers\OrdersController.cs" />
     <Compile Include="Areas\IMS\IMSAreaRegistration.cs" />
     <Compile Include="Areas\IMS\ViewModels\AddressFormViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\AddressSelectionViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\ArtistFormViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\ArtworkFormViewModel.cs" />
+    <Compile Include="Areas\IMS\ViewModels\CreateOrderViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\AddressesController.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Controllers\API\GenresController.cs" />
     <Compile Include="Controllers\API\InteractionsController.cs" />
     <Compile Include="Controllers\API\MediumsController.cs" />
+    <Compile Include="Controllers\API\OrdersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -235,6 +238,7 @@
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\InteractionDto.cs" />
     <Compile Include="Dtos\MediumDto.cs" />
+    <Compile Include="Dtos\OrderDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,6 +310,18 @@
     <Compile Include="Migrations\201804011856157_AddInteractionTableToDatabase.Designer.cs">
       <DependentUpon>201804011856157_AddInteractionTableToDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804032129316_AddOrderTableToDatabase.cs" />
+    <Compile Include="Migrations\201804032129316_AddOrderTableToDatabase.Designer.cs">
+      <DependentUpon>201804032129316_AddOrderTableToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804071136320_AddPaidColumToOrderTable.cs" />
+    <Compile Include="Migrations\201804071136320_AddPaidColumToOrderTable.Designer.cs">
+      <DependentUpon>201804071136320_AddPaidColumToOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804071559282_UpdateOrderStatusColumn.cs" />
+    <Compile Include="Migrations\201804071559282_UpdateOrderStatusColumn.Designer.cs">
+      <DependentUpon>201804071559282_UpdateOrderStatusColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -315,6 +331,8 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Interaction.cs" />
     <Compile Include="Models\Medium.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
@@ -613,6 +631,13 @@
     <Content Include="Areas\IMS\Views\Shared\_LogInteractionPartial.cshtml" />
     <Content Include="Areas\IMS\Views\Shared\_CustomerProfilePanelPartial.cshtml" />
     <Content Include="Areas\IMS\Views\Shared\_CustomerInteractionsPanelPartial.cshtml" />
+    <Content Include="Areas\IMS\Views\Orders\Create.cshtml" />
+    <Content Include="Areas\IMS\Views\Orders\Delete.cshtml" />
+    <Content Include="Areas\IMS\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\IMS\Views\Orders\Edit.cshtml" />
+    <Content Include="Areas\IMS\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\IMS\Views\Orders\NewOrderForm.cshtml" />
+    <Content Include="Areas\IMS\Views\Orders\EditOrderForm.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -749,6 +774,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804011856157_AddInteractionTableToDatabase.resx">
       <DependentUpon>201804011856157_AddInteractionTableToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804032129316_AddOrderTableToDatabase.resx">
+      <DependentUpon>201804032129316_AddOrderTableToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071136320_AddPaidColumToOrderTable.resx">
+      <DependentUpon>201804071136320_AddPaidColumToOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071559282_UpdateOrderStatusColumn.resx">
+      <DependentUpon>201804071559282_UpdateOrderStatusColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -38,10 +38,33 @@
                 @Html.Partial("_CustomerInteractionsPanelPartial", Model.Customer)
             </div>
             <div class="tab-pane fade" id="order-panel" role="tabpanel">
-                <p>Orders will go here</p>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <hr />
+                        <table class="table table-striped" id="orders">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Order Number
+                                    </th>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 </div>
 
 
@@ -51,8 +74,41 @@
 {
     <script>
         $(document).ready(function () {
+            var orderTable = $("#orders").DataTable({
+                ajax: {
+                    url: "/api/orders/" + @Model.Customer.Id,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "order",
+                        render: function (data, type, order) {
+                            return "<a href='@Url.Content("~/IMS/orders/details/")" + order.id + "'>" + order.id + "</a>";
+                        }
+                    },
+                    {
+                        data: "date",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "totalPrice",
+                        render: function (data) {
+                            return "£" + data;
+                        }
+                    },
+                    {
+                        data: "orderStatus",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                ]
+            });
 
-            var table = $("#interactions").DataTable({
+
+            var interactionTable = $("#interactions").DataTable({
                 "order": [[2, "desc"]],
                 ajax: {
                     url: "/api/interactions/" + $("#interactions").attr("data-customer-id") + "/",
@@ -103,7 +159,7 @@
                         success: function () {
                             bootbox.alert("Interaction was succesfully logged");
                             $("#interaction").val("");
-                            table.ajax.reload();
+                            interactionTable.ajax.reload();
                         }
                     });
                 }

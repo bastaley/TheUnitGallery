@@ -1,0 +1,82 @@
+﻿<div class="row body-content">
+    @Html.Partial("_IMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h3>All Orders</h3>
+        <hr />
+        <table class="table" id="orders">
+            <thead>
+                <tr>
+                    <th>
+                        Order Number
+                    </th>
+                    <th>
+                        Customer
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>            
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#orders").DataTable({
+                ajax: {
+                    url: "/api/orders",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "order",
+                        render: function (data, type, order) {
+                            return "<a href='orders/details/" + order.id + "'>" + order.id + "</a>";
+                        }
+                    },
+                    {
+                        data: "customer",
+                        render: function (data, type, customer) {
+                            return data.firstName + " " + data.lastName;
+                        }
+                    },
+                    {
+                        data: "date",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "totalPrice",
+                        render: function (data) {
+                            return "£" + data;
+                        }
+                    },
+                    {
+                        data: "orderStatus",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                ]
+
+
+            });
+        });
+
+    </script>
+
+}

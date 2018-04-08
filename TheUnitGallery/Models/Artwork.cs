@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -37,6 +39,7 @@ namespace TheUnitGallery.Models
         public double SalesPrice { get; set; }
 
         [Required]
+        [JsonConverter(typeof(StringEnumConverter))]
         public ArtworkStatus ArtworkStatus { get; set; }
     }
 }

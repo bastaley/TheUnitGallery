@@ -76,6 +76,7 @@ namespace TheUnitGallery.Areas.IMS.Controllers
                 artworkInDb.CostPrice = artwork.CostPrice;
                 artworkInDb.SalesPrice = artwork.SalesPrice;
                 artworkInDb.Year = artwork.Year;
+                artworkInDb.ArtworkStatus = artwork.ArtworkStatus;
 
                 artworkInDb.ArtistId = artwork.ArtistId;
                 artworkInDb.GenreId = artwork.GenreId;

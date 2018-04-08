@@ -14,8 +14,53 @@ namespace TheUnitGallery
             var settings = config.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;
+            settings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
             config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                "InvoiceOrder",
+                "API/orders/invoice/{Id}",
+                new { controller = "Orders", action = "InvoiceOrder" }
+            );
+
+            config.Routes.MapHttpRoute(
+                "PayOrder",
+                "API/orders/pay/{Id}",
+                new { controller = "Orders", action = "PayOrder" }
+            );
+
+            config.Routes.MapHttpRoute(
+                "CancelOrder",
+                "API/orders/cancel/{Id}",
+                new { controller = "Orders", action = "CancelOrder" }
+            );
+
+
+            config.Routes.MapHttpRoute(
+                "GetOrdersItems",
+                "API/orders/items/{Id}",
+                new { controller = "Orders", action = "GetOrdersItems" }
+            );
+
+            config.Routes.MapHttpRoute(
+                "GetCustomerItems",
+                "API/orders/{Id}",
+                new { controller = "Orders", action = "GetCustomerOrders" }
+            );
+
+            config.Routes.MapHttpRoute(
+                "AddArtworkToOrder",
+                "API/orders/add/{orderId}/{artworkId}",
+                new { controller = "Orders", action = "AddArtworkToOrder" }
+            );
+
+            config.Routes.MapHttpRoute(
+                "RemoveArtworkFromOrder",
+                "API/orders/remove/{orderId}/{artworkId}",
+                new { controller = "Orders", action = "RemoveArtworkFromOrder" }
+            );
+
 
             config.Routes.MapHttpRoute(
                 "ChangeCustomerAddress",

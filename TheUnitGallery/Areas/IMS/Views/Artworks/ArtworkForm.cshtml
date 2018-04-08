@@ -59,6 +59,10 @@
                     <div class="form-group">
                         <label for="medium-selection">Medium</label>
                         <select class="custom-select" id="medium-selection" required></select>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Artwork.ArtworkStatus, "Artwork Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EnumDropDownListFor(model => model.Artwork.ArtworkStatus, "Select Status", new { @class = "form-control"})
                     </div><hr /><hr />
                     <div class="form-group">
                         <input type="text" class="form-control" id="new-medium-genre" value="Enter new Medium or Genre here" />

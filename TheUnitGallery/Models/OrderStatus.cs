@@ -8,11 +8,11 @@ using System.Web;
 namespace TheUnitGallery.Models
 {
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum ArtworkStatus
+    public enum OrderStatus
     {
-        Preperation = 1,
-        ForSale = 2,
-        Reserved = 3,
-        Sold = 4
+        Open = 1,
+        Invoiced = 2,
+        Paid = 3,
+        Cancelled = 4
     }
 }

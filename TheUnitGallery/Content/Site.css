@@ -445,3 +445,12 @@ nav .nav-button {
 table {
     width: 100% !important;
 }
+
+.right {
+    float: right;
+}
+
+
+.hide {
+    display: none !important;
+}

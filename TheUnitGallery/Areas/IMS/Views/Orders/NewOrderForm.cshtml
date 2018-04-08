@@ -1,0 +1,43 @@
+﻿@model TheUnitGallery.Areas.IMS.ViewModels.CreateOrderViewModel
+
+<div class="row body-content">
+    @Html.Partial("_IMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h3>Create Order</h3><hr />
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Details</h3>
+                <p>Creating order for <strong>@Model.Customer.FullName</strong></p>
+                <p>Account Number: <strong>@Model.Customer.Id</strong></p>
+                <p>Date: <strong>@Model.Order.Date</strong></p>
+            </div>
+            <div class="col-sm-4">
+                <h3>Shipping Address</h3>
+                @Html.Raw(Model.Order.ShippingAddress)
+            </div>
+            <div class="col-sm-4">
+                <h3>Billing Address</h3>
+                @Html.Raw(Model.Order.BillingAddress)
+            </div>
+        </div>
+        @using (Html.BeginForm("Save", "Orders"))
+        {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.HiddenFor(m => m.Order.CustomerId)
+                @Html.HiddenFor(m => m.Order.BillingAddress)
+                @Html.HiddenFor(m => m.Order.ShippingAddress)
+                @Html.HiddenFor(m => m.Order.Date)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create New Order" class="btn btn-primary" />
+                <input type="button" value="Manage Addresses" class="btn btn-outline-primary" onclick="location.href='@Url.Action("Addresses", "Customers", new {id = Model.Customer.Id})'" />
+            </div>
+        </div>
+         }
+
+    </div>
+</div>

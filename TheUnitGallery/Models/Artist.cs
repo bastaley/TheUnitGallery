@@ -18,6 +18,14 @@ namespace TheUnitGallery.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public String FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
         public string Alias { get; set; }
     }
 }
