@@ -242,10 +242,11 @@ footer, .ads {
 .inverse {
     background-color: #404040;
     color: #FFF;
+    transition: 1s;
 }
 
 .white-space {
-    padding: 10px 50px 40px;
+    padding: 30px 50px 40px;
 }
 
 .no-inside-gutters > .col,
@@ -295,7 +296,7 @@ footer, .ads {
     font-weight: 900;
 }
 
-/********** NAVIGATION **********/
+/********** MAIN NAV NAVIGATION **********/
 nav ul {
     margin: 0;
     padding: 0;
@@ -308,10 +309,13 @@ nav li {
 nav .nav-button {
     height: 60px;
     border: 1px solid #ECECEC;
+    border-right: none;
     line-height: 60px;
     padding-left: 50px;
     font-size: 20px;
     font-family: 'Lato',sans-serif;
+    cursor: pointer;
+    transition: 1s;
 }
 
     nav .nav-button:after {
@@ -320,8 +324,101 @@ nav .nav-button {
         right: 20px;
     }
 
-/********** ADMIN NAVIGATION **********/
+#nav-slider {
+    min-height: 462px;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    background: white;
+    width: calc(100% + 1px);
+    transition: 1s;
+    border-bottom: 1px solid #ECECEC;
+    border-left: 1px solid #ECECEC;
+    padding: 15px;
+    overflow: hidden;
+}
 
+    #nav-slider.active {
+        transform: translateX(calc(100% - 1px));
+        display: block;
+        transition: 1s;
+    }
+
+    .z-forward {
+        z-index: 1;
+        background: #fff;
+    }
+
+.nav-slider-inner {
+    position: absolute;
+    left: -100%;
+    width: calc(100% - 30px);
+    text-align: center;
+    transition-delay: 0.2s;
+}
+
+    .nav-slider-inner.active {
+        transform: translateX(calc(100% + 30px));
+        transition-delay: 0.2s;
+    }
+
+.nav-slider-inner ul {
+    list-style-type: none;
+    margin: 20px 20px 0 20px;
+    padding: 0;
+}
+
+    .nav-slider-inner ul li {
+        text-transform: uppercase;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-slider-inner ul.horizontal li {
+        display: inline;
+    }
+
+    .nav-slider-inner .nav-img {
+        width: 100%;
+        margin-bottom: 20px;
+
+    }
+
+        .nav-slider-inner .nav-img img {
+            max-width: 100%;
+        }
+
+        .nav-slider-inner .fa-angle-left, .nav-slider-inner .fa-angle-right {
+            position: absolute;
+            top: 305px;
+            font-size: 50px;
+            cursor: pointer;
+        }
+
+    .nav-slider-inner .fa-angle-left {
+        left: 25px;
+    }
+
+    .nav-slider-inner .fa-angle-right {
+        right: 25px;
+    }
+
+    .nav-slider-inner .selected {
+        font-weight: 700;
+    }
+
+    #artists {
+        float: left;
+        text-align: left;
+    }
+
+    #artists a:hover {
+        font-weight: bold;
+    }
+
+
+
+/********** ADMIN NAVIGATION **********/
 .admin-nav ul {
     padding: 0;
 }
@@ -370,7 +467,6 @@ nav .nav-button {
     background-color: blue;
     min-height: 462px;
 }
-
 
 
 /*********IMS **********/
@@ -453,4 +549,8 @@ table {
 
 .hide {
     display: none !important;
+}
+
+img {
+    max-width: 100%;
 }

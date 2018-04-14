@@ -19,6 +19,18 @@ namespace TheUnitGallery
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                "togglemediumstatus",
+                "API/mediums/status/{id}",
+                new { controller = "Mediums", action = "ToggleMediumStatus" }
+            );
+
+            config.Routes.MapHttpRoute(
+                "togglegenrestatus",
+                "API/genres/status/{id}",
+                new { controller = "Genres", action = "ToggleGenreStatus" }
+            );
+
+            config.Routes.MapHttpRoute(
                 "StaffUsers",
                 "API/users/staff/",
                 new { controller = "Users", action = "GetStaffUsers" }

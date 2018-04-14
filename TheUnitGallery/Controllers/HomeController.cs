@@ -22,7 +22,20 @@ namespace TheUnitGallery.Controllers
 
             var viewModel = new HomepageViewModel
             {
-                AboutUs = _context.Blocks.Find("AboutUs")
+                Genres = _context.Genres
+                .Where(g => g.VisibleFrontEnd == true)
+                .OrderBy(g => g.Name)
+                .ToList(),
+
+                Mediums = _context.Mediums
+                .Where(g => g.VisibleFrontEnd == true)
+                .OrderBy(g => g.Name)
+                .ToList(),
+
+                Artists = _context.Artists
+                .OrderBy(g => g.FirstName)
+                .ToList(),
+                
             };
 
             return View(viewModel);

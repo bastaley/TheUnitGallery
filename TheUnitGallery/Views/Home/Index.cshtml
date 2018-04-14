@@ -5,7 +5,8 @@
 }
 
 <div class="row body-content no-inside-gutters">
-    <div class="col-sm-12 col-md-6">
+    @*LEFT SIDE*@
+    <div class="col-sm-12 col-md-6 z-forward">
         <div class="row">
             <div class="col-sm-12 sub-heading">
                 <h2>Modern Art At The Unit</h2>
@@ -13,15 +14,14 @@
         </div>
         <div class="row no-gutters">
             <div class="col-md-6 unit-site">
-                Content here
+                <img src="~/Uploads/default/theunit.jpg" />
             </div>
             <div class="col-md-6">
                 <nav>
                     <ul>
-                        <li><div class="nav-button">Genre</div></li>
-                        <li><div class="nav-button">Medium</div></li>
-                        <li><div class="nav-button">Artist</div></li>
-                        <li><div class="nav-button">Year</div></li>
+                        <li><div class="nav-button" id="genre-btn">Genre</div></li>
+                        <li><div class="nav-button" id="medium-btn">Medium</div></li>
+                        <li><div class="nav-button" id="artist-btn">Artist</div></li>
                     </ul>
                 </nav>
             </div>
@@ -30,13 +30,15 @@
         <div class="row">
             <div class="col-sm-12 white-space">
                 <h2>About us...</h2>
-                <p>@Model.AboutUs.Content</p>
+                @Html.Raw(Model.AboutUs.Content)
             </div>
         </div>
     </div>
+    @*END LEFT SIDE*@
 
     <div class="col-sm-12 col-md-6">
         <div class="temp-holder"></div>
+        <div id="nav-slider">@Html.Partial("_NavigationSliderPartial", Model)</div>
         <div class="white-space">
             <h5>Featured Art</h5>
             <h2>Artwork Name Here</h2>

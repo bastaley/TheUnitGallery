@@ -55,6 +55,27 @@ namespace TheUnitGallery.Controllers.API
         }
 
 
+        // PUT /api/genres/status/1
+        public IHttpActionResult ToggleMediumStatus(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var mediumInDb = _context.Mediums.SingleOrDefault(c => c.Id == id);
+
+            if (mediumInDb == null)
+                return NotFound();
+
+            if (mediumInDb.VisibleFrontEnd)
+                mediumInDb.VisibleFrontEnd = false;
+            else
+                mediumInDb.VisibleFrontEnd = true;
+
+            _context.SaveChanges();
+
+            return Ok(mediumInDb.VisibleFrontEnd);
+        }
+
         // PUT /api/mediums/1
         public IHttpActionResult UpdateMedium(int id, MediumDto mediumDto)
         {

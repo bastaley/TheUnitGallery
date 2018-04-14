@@ -1,0 +1,63 @@
+﻿@model TheUnitGallery.ViewModels.HomepageViewModel
+
+<div class="nav-slider-inner" id="genre-nav">
+    <i class="fas fa-angle-left"></i>
+    <i class="fas fa-angle-right"></i>
+    <hr />
+    <span class="h2">Browse by Genre</span>
+    <hr />
+    <div class="nav-img"><img src="~/Uploads/default/placeholder.jpg" /></div>
+    <p class="h2">Browse <span id="currentGenre">@Model.Genres[0].Name</span></p>
+    <ul class="horizontal">
+        @foreach (var genre in Model.Genres)
+        {
+            if (genre == Model.Genres.First())
+            {
+                <li class="selected">@Html.ActionLink(genre.Name, "Genres", new { id = genre.Id, name = genre.Name })</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink(genre.Name, "Genre", new { id = genre.Id, name = genre.Name })</li>
+            }
+
+        }
+    </ul>
+</div>
+
+
+<div class="nav-slider-inner" id="medium-nav">
+    <i class="fas fa-angle-left"></i>
+    <i class="fas fa-angle-right"></i>
+    <hr />
+    <span class="h2">Browse by Medium</span>
+    <hr />
+    <div class="nav-img"><img src="~/Uploads/default/placeholder.jpg" /></div>
+    <p class="h2">Browse <span id="currentMedium">@Model.Mediums[0].Name</span></p>
+    <ul class="horizontal">
+        @foreach (var medium in Model.Mediums)
+        {
+            if (medium == Model.Mediums.First())
+            {
+                <li class="selected">@Html.ActionLink(medium.Name, "Mediums", new { id = medium.Id, name = medium.Name })</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink(medium.Name, "Genre", new { id = medium.Id, name = medium.Name })</li>
+            }
+
+        }
+    </ul>
+</div>
+
+<div class="nav-slider-inner" id="artist-nav">
+    <hr />
+    <span class="h2">Browse by Artist</span>
+    <hr />
+    <ul id="artists">
+        @foreach (var artist in Model.Artists)
+        {
+            <li>@Html.ActionLink(artist.FullName, "Artists", new { id = artist.Id })</li>
+        }
+
+    </ul>
+</div>

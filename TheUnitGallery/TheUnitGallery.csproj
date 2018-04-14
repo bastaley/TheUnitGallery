@@ -206,6 +206,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\CMS\CMSAreaRegistration.cs" />
+    <Compile Include="Areas\CMS\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\CMS\Controllers\MediumsController.cs" />
+    <Compile Include="Areas\CMS\Controllers\GenresController.cs" />
     <Compile Include="Areas\IMS\Controllers\AddressesController.cs" />
     <Compile Include="Areas\IMS\Controllers\ArtistsController.cs" />
     <Compile Include="Areas\IMS\Controllers\ArtworksController.cs" />
@@ -341,6 +345,7 @@
     <Compile Include="Models\Block.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Homepage.cs" />
     <Compile Include="Models\Interaction.cs" />
     <Compile Include="Models\Medium.cs" />
     <Compile Include="Models\Order.cs" />
@@ -631,6 +636,7 @@
     <Content Include="Areas\IMS\Views\Shared\_HeaderPartial.cshtml" />
     <Content Include="Areas\IMS\Views\Customers\Index.cshtml" />
     <Content Include="Areas\IMS\Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Scripts\mainnav.slideout.js" />
     <Content Include="Scripts\header.dropdown.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
@@ -654,6 +660,15 @@
     <Content Include="Areas\IMS\Views\Orders\EditOrderForm.cshtml" />
     <Content Include="Areas\IMS\Views\Staff\Index.cshtml" />
     <Content Include="Areas\IMS\Views\Staff\Add.cshtml" />
+    <Content Include="Areas\CMS\Views\web.config" />
+    <Content Include="Areas\CMS\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Shared\_CMSAdminNavPanel.cshtml" />
+    <Content Include="Areas\CMS\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CMS\Views\Shared\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Shared\_HeaderPartial.cshtml" />
+    <Content Include="Areas\CMS\Views\Genres\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Mediums\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -677,6 +692,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Uploads\default\placeholder.jpg" />
+    <Content Include="Uploads\default\theunit.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -724,9 +741,11 @@
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
     <Content Include="Views\Shared\_AccountDropdownPartial.cshtml" />
     <Content Include="Views\Shared\_SearchBarDropdownPartial.cshtml" />
+    <Content Include="Views\Shared\_NavigationSliderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CMS\Models\" />
     <Folder Include="Areas\IMS\Models\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>

@@ -73,6 +73,27 @@ namespace TheUnitGallery.Controllers.API
             return Ok();
         }
 
+        // PUT /api/genres/status/1
+        public IHttpActionResult ToggleGenreStatus(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var genreInDb = _context.Genres.SingleOrDefault(c => c.Id == id);
+
+            if (genreInDb == null)
+                return NotFound();
+
+            if (genreInDb.VisibleFrontEnd)
+                genreInDb.VisibleFrontEnd = false;
+            else
+                genreInDb.VisibleFrontEnd = true;
+
+            _context.SaveChanges();
+
+            return Ok(genreInDb.VisibleFrontEnd);
+        }
+
         // DELETE /api/genres/1
         public IHttpActionResult DeleteGenre(int id)
         {
