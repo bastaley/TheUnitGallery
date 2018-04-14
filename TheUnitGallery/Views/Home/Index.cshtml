@@ -1,4 +1,6 @@
-﻿@{
+﻿@model TheUnitGallery.ViewModels.HomepageViewModel
+
+@{
     ViewBag.Title = "Modern Art Gallery";
 }
 
@@ -11,7 +13,7 @@
         </div>
         <div class="row no-gutters">
             <div class="col-md-6 unit-site">
-
+                Content here
             </div>
             <div class="col-md-6">
                 <nav>
@@ -28,7 +30,7 @@
         <div class="row">
             <div class="col-sm-12 white-space">
                 <h2>About us...</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non semper quam. In hac habitasse platea dictumst. Integer tellus eros, facilisis non diam at, pellentesque vestibulum sapien. Praesent volutpat imperdiet neque, quis pretium orci consectetur eget. Aliquam maximus eu nibh vitae ultricies. Aenean bibendum bibendum laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In scelerisque nibh magna, eu scelerisque lectus blandit eget. </p>
+                <p>@Model.AboutUs.Content</p>
             </div>
         </div>
     </div>

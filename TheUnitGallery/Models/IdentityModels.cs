@@ -32,6 +32,8 @@ namespace TheUnitGallery.Models
         public DbSet<Interaction> Interactions { get; set; }
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<Block> Blocks { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
