@@ -34,6 +34,10 @@ namespace TheUnitGallery.Models
 
         public DbSet<Block> Blocks { get; set; }
 
+        public DbSet<Page> Pages { get; set; }
+
+        public DbSet<Blockstrips> Blockstrips { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

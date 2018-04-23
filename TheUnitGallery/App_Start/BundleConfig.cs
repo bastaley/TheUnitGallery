@@ -10,6 +10,7 @@ namespace TheUnitGallery
         {
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.Jcrop.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
@@ -27,6 +28,7 @@ namespace TheUnitGallery
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/DataTables/css/dataTables.bootstrap4.css",
+                      "~/Content/jquery.Jcrop.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/dropdowns").Include(

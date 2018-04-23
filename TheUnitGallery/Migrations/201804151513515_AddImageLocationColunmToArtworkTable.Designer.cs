@@ -7,13 +7,13 @@ namespace TheUnitGallery.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class SeedAboutUsBlock : IMigrationMetadata
+    public sealed partial class AddImageLocationColunmToArtworkTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedAboutUsBlock));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddImageLocationColunmToArtworkTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804140833027_SeedAboutUsBlock"; }
+            get { return "201804151513515_AddImageLocationColunmToArtworkTable"; }
         }
         
         string IMigrationMetadata.Source

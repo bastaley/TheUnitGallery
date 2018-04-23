@@ -1,0 +1,17 @@
+﻿@model TheUnitGallery.Models.Blockstrips 
+
+
+<footer class="row content">
+    <div class="col-md-12 inverse logo">
+        <h1>The Unit</h1>
+    </div>
+    <div class="col-md-4">
+        @Html.Raw(Model.LeftContent.Content)
+    </div>
+    <div class="col-md-4">
+        @Html.Raw(Model.MiddleContent.Content)
+    </div>
+    <div class="col-md-4">
+@Html.Raw(Model.RightContent.Content)
+    </div>
+</footer>

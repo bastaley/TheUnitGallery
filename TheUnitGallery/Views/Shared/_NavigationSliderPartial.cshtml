@@ -13,11 +13,11 @@
         {
             if (genre == Model.Genres.First())
             {
-                <li class="selected">@Html.ActionLink(genre.Name, "Genres", new { id = genre.Id, name = genre.Name })</li>
+                <li class="selected">@Html.ActionLink(genre.Name, "Index", "Genres", new { genreName = genre.Name }, new { })</li>
             }
             else
             {
-                <li>@Html.ActionLink(genre.Name, "Genre", new { id = genre.Id, name = genre.Name })</li>
+                <li>@Html.ActionLink(genre.Name, "Index", "Genres", new { genreName = genre.Name }, new { })</li>
             }
 
         }

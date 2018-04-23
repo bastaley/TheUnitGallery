@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TheUnitGallery.Models.Page>
+
+@{
+    ViewBag.Title = "Pages";
+}
+
+<div class="row body-content">
+    @Html.Partial("_CMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h2>Pages</h2>
+        <hr />
+
+        <p>
+            @Html.ActionLink("Create New", "Create", new { }, new { @class="btn btn-outline-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Identifier)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identifier)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Identifier }, new { @class="btn btn-outline-primary"}) 
+                    @Html.ActionLink("Details", "Details", new { id = item.Identifier }, new { @class = "btn btn-outline-primary" })
+                    @if (item.Identifier != "homepage")
+                    {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Identifier }, new { @class = "btn btn-outline-danger" })
+                    }
+                </td>
+            </tr>
+            }
+
+        </table>
+            </div>
+        </div>
+
+
+

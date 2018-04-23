@@ -1,0 +1,81 @@
+﻿@model TheUnitGallery.ViewModels.UploadImageViewModel
+
+@using TheUnitGallery.ViewModels
+
+@{
+    ViewBag.Title = "UploadImage";
+}
+
+<div class="row body-content">
+    @Html.Partial("_CMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <h3>@ViewBag.Title</h3>
+                <hr />
+                @using (Html.BeginForm("UploadImage", "Artworks", FormMethod.Post, new { enctype = "multipart/form-data", id = Model.ArtworkId }))
+    {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Image)
+                <input type="file" name="Image" />
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(m => m.ArtworkId)
+                @Html.HiddenFor(m => m.X)
+                @Html.HiddenFor(m => m.Y)
+                @Html.HiddenFor(m => m.W)
+                @Html.HiddenFor(m => m.H)
+            </div>
+            <span id="XX">@Model.X</span><br />
+            <span id="YY">@Model.Y</span><br />
+            <span id="WW">@Model.W</span><br />
+            <span id="HH">@Model.H</span><br />
+            <button type="submit" class="btn btn-primary save-btn">Upload Image</button>
+}
+            </div>
+            <div class="col-sm-8">
+                @if (Model.Path != null)
+    {
+            <div class="crop-box">
+                <img id="target" src="@Url.Content("~" + Model.Path)" />
+            </div>
+}
+                <hr />
+                <div class="form-group">
+                    <button class="btn btn-success" Onclick="btnUpload_Click">Save File</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section scripts
+{
+<script language="Javascript">
+    $(document).ready(function () {
+        $('#target').Jcrop({
+            boxWidth: 650,
+            boxHeight: 600,
+            bgColor: 'black',
+            bgOpacity: .4,
+            maxSize: [570, 462],
+            setSelect: [0, 0, 570, 462],
+            aspectRatio: 570 / 462,
+            onSelect: storeCoords
+        });
+
+        function storeCoords(c) {
+            $('#X').val(c.x);
+            $('#Y').val(c.y);
+            $('#W').val(c.w);
+            $('#H').val(c.h);
+
+
+            $('#XX').text(c.x);
+            $('#YY').text(c.y);
+            $('#WW').text(c.w);
+            $('#HH').text(c.h);
+        }
+    });
+</script>    
+}

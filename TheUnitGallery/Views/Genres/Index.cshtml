@@ -1,0 +1,29 @@
+﻿@model TheUnitGallery.ViewModels.CategoryViewModel
+
+@{
+    ViewBag.Title = "Modern Art Gallery";
+}
+
+<div class="row body-content">
+    <div class="col-sm-12 col-md-12">
+        <h2>Viewing Artwork: @Model.Title</h2>
+        <hr />
+        @foreach (var Artwork in Model.Artworks)
+    {
+        <div class="artwork-list">
+            <div class="list-info">
+                <h3>@Artwork.Title</h3>
+                <span class="h5">By: @Artwork.Artist.FullName</span><br />
+                <span class="h5">Genre: @Artwork.Genre.Name</span><br />
+                <span class="h5">Medium: @Artwork.Medium.Name</span><br />
+                <span class="h4">£@Artwork.SalesPrice.ToString("0.00")</span>
+            </div>
+            <div class="list-img">
+                <img src="~/Uploads/default/placeholder.jpg" />
+            </div>
+        </div>
+}
+    </div> 
+</div>
+
+@{Html.RenderAction("Adstrip", "Footer", new { area = "", blockStripIdentifier = "Adstrip" });}

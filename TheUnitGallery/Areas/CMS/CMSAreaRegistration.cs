@@ -17,7 +17,8 @@ namespace TheUnitGallery.Areas.CMS
             context.MapRoute(
                 "CMS_default",
                 "CMS/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "TheUnitGallery.Areas.CMS.Controllers"}
             );
         }
     }

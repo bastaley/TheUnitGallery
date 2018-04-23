@@ -1,0 +1,14 @@
+﻿@model TheUnitGallery.Models.Blockstrips 
+
+
+<div class="row content ads">
+    <div class="col-md-4">
+        @Html.Raw(Model.LeftContent.Content)
+    </div>
+    <div class="col-md-4">
+        @Html.Raw(Model.MiddleContent.Content)
+    </div>
+    <div class="col-md-4">
+@Html.Raw(Model.RightContent.Content)
+    </div>
+</div>

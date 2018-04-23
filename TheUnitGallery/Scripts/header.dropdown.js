@@ -113,7 +113,7 @@
          console.log(currentli);
          var nextli = currentli.next();
 
-         if (nextli.length == 0) {
+         if (nextli.length === 0) {
              nextli = menu.children('ul').children('li').first();
          }
 
@@ -134,7 +134,7 @@
          var currentli = menu.find('.selected');
          var nextli = currentli.prev();
 
-         if (nextli.length == 0) {
+         if (nextli.length === 0) {
              nextli = menu.children('ul').children('li').last();
          }
 

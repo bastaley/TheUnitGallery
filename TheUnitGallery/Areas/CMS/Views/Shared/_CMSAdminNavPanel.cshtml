@@ -3,7 +3,11 @@
         <span>Picasso CMS</span>
     </div>
     <ul>
-        <li>@Html.ActionLink("Homepage", "Index", "Dashboard", new { area = "IMS" }, new { })</li>
+        <li>@Html.ActionLink("Pages", "Index", "Pages", new { area = "CMS" }, new { })</li>
+
+        <li>@Html.ActionLink("Blocks", "Index", "Blocks", new { area = "CMS" }, new { })</li>
+
+        <li>@Html.ActionLink("Block Strips", "Index", "BlockStrips", new { area = "CMS" }, new { })</li>
     </ul>
     <div class="inverse nav-title">
         <span>Navigation Bar</span>
@@ -11,7 +15,12 @@
     <ul>
         <li>@Html.ActionLink("Genres", "Index", "Genres", new { area = "CMS" }, new { })</li>
         <li>@Html.ActionLink("Mediums", "Index", "Mediums", new { area = "CMS" }, new { })</li>
-        <li>@Html.ActionLink("Artists", "Index", "Artists", new { area = "CMS" }, new { })</li>
+    </ul>
+    <div class="inverse nav-title">
+        <span>Artwork</span>
+    </div>
+    <ul>
+        <li>@Html.ActionLink("Artwork", "Index", "Artworks", new { area = "CMS" }, new { })</li>
     </ul>
     @*<div class="inverse nav-title">
             <span>Artwork</span>

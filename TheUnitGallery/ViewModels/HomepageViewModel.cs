@@ -9,7 +9,7 @@ namespace TheUnitGallery.ViewModels
     public class HomepageViewModel
     {
 
-        public Homepage Homepage { get; set; }
+        public Page Homepage { get; set; }
         public List<Genre> Genres { get; set; }
         public List<Medium> Mediums { get; set; }
         public List<Artist> Artists { get; set; }

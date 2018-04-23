@@ -13,7 +13,33 @@ namespace TheUnitGallery
         {
             ConfigureAuth(app);
             createRolesandUsers();
+            createAboutBlockAndHomePage();
+
         }
+
+        private void createAboutBlockAndHomePage()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            //Setting up homepage
+            if (context.Pages.Find("homepage") == null)
+            {
+                //Create the about us block
+                var AboutBlock = new Block();
+
+                    AboutBlock.Name = "AboutUs";
+                    AboutBlock.Content = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non semper quam. In hac habitasse platea dictumst. Integer tellus eros, facilisis non diam at, pellentesque vestibulum sapien. Praesent volutpat imperdiet neque, quis pretium orci consectetur eget. Aliquam maximus eu nibh vitae ultricies. Aenean bibendum bibendum laoreet.</p><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit.In scelerisque nibh magna, eu scelerisque lectus blandit eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit.In scelerisque nibh magna, eu scelerisque lectus blandit eget.</p>";
+
+                // create a page called homepage    
+                var homepage = new Page
+                {
+                    Identifier = "homepage",
+                    Title = "Modern Art At The Unit",
+                    Content = AboutBlock,
+                };
+            }
+        }
+
 
         // In this method we will create default User roles and Admin user for login    
         private void createRolesandUsers()
@@ -22,7 +48,6 @@ namespace TheUnitGallery
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
 
             // In Startup iam creating first Admin Role and creating a default Admin User     
             if (!roleManager.RoleExists("Admin"))
@@ -71,7 +96,6 @@ namespace TheUnitGallery
                     Name = "Customer"
                 };
                 roleManager.Create(role);
-
             }
         }
     }

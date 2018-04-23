@@ -16,7 +16,6 @@ namespace TheUnitGallery.Models
         [Required]
         public string Title { get; set; }
 
-
         [Required]
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }
@@ -41,5 +40,7 @@ namespace TheUnitGallery.Models
         [Required]
         [JsonConverter(typeof(StringEnumConverter))]
         public ArtworkStatus ArtworkStatus { get; set; }
+
+        public string IamgeLocation { get; set; }
     }
 }

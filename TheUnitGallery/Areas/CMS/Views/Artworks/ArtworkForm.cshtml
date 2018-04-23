@@ -1,0 +1,208 @@
+﻿@model TheUnitGallery.Areas.CMS.ViewModels.ArtworkFormViewModel
+
+@using TheUnitGallery.Areas.CMS.ViewModels
+
+<div class="row body-content">
+    @Html.Partial("_CMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>@Model.Title</h3>
+                <hr />
+            </div>
+        </div>
+        @using (Html.BeginForm("Save", "Artworks"))
+        {
+            @Html.ValidationSummary()
+            <div class="row">
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artwork.Title)
+                        @Html.TextBoxFor(m => m.Artwork.Title, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artwork.Subject)
+                        @Html.TextBoxFor(m => m.Artwork.Subject, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artwork.Year)
+                        @Html.TextBoxFor(m => m.Artwork.Year, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artwork.CostPrice)
+                        @Html.TextBoxFor(m => m.Artwork.CostPrice, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Artwork.SalesPrice)
+                        @Html.TextBoxFor(m => m.Artwork.SalesPrice, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Artwork.Id)
+                        @Html.HiddenFor(m => m.Artwork.GenreId)
+                        @Html.HiddenFor(m => m.Artwork.ArtistId)
+                        @Html.HiddenFor(m => m.Artwork.MediumId)
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="artist-selection">Artist</label>
+                        <select class="custom-select" id="artist-selection" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre-selection">Genre</label>
+                        <select class="custom-select" id="genre-selection" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="medium-selection">Medium</label>
+                        <select class="custom-select" id="medium-selection" required></select>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Artwork.ArtworkStatus, "Artwork Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EnumDropDownListFor(model => model.Artwork.ArtworkStatus, "Select Status", new { @class = "form-control"})
+                    </div><hr /><hr />
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="new-medium-genre" value="Enter new Medium or Genre here" />
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" id="add-medium">Add As Medium</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="add-genre">Add As Genre</button>
+                    @*</div>*@
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            getGenres();
+            getMediums();
+            getArtists();
+
+            //CHANGE HIDDEN FIELDS WHEN DROPDOWNS CHANGE
+            $('#artist-selection').on('change', function () {
+                $('#Artwork_ArtistId').attr('value', this.value);
+            })
+
+            $('#medium-selection').on('change', function () {
+                $('#Artwork_MediumId').attr('value', this.value);
+            })
+
+            $('#genre-selection').on('change', function () {
+                $('#Artwork_GenreId').attr('value', this.value);
+            })
+
+
+            //ADD GENRE
+
+            $("#new-medium-genre").on('click', function () {
+                $(this).val("");
+            });
+
+            $("#add-genre").on("click", function () {
+
+                var name = $("#new-medium-genre").val()
+
+                var newItem = {
+                    name: name
+                };
+
+                $.ajax({
+                    method: "POST",
+                    url: "/api/genres",
+                    contentType: "application/json",
+                    data: JSON.stringify(newItem),
+                    success: function () {
+                        $('#genre-selection').empty();
+                        getGenres();
+                        bootbox.alert(name + " was succesfully added to Genres");
+                        $("#new-medium-genre").val("Enter new Medium or Genre here...");
+                    }
+                });
+            });
+
+            //ADD MEDIUM
+            $("#add-medium").on("click", function () {
+
+                var name = $("#new-medium-genre").val()
+
+                var newItem = {
+                    name: name
+                };
+
+                $.ajax({
+                    method: "POST",
+                    url: "/api/mediums",
+                    contentType: "application/json",
+                    data: JSON.stringify(newItem),
+                    success: function () {
+                        $('#medium-selection').empty();
+                        getMediums();
+                        bootbox.alert(name + " was succesfully added to Mediums");
+                        $("#new-medium-genre").val("Enter new Medium or Genre here...");
+                    }
+                });
+            });
+
+
+            //POPULATE DROPDOWN LISTS FROM API
+            function getGenres() {
+                $.ajax({
+                    method: "GET",
+                    url: "/api/genres/",
+
+                    success: function (result) {
+                        for (var i in result) {
+                            $('#genre-selection').append($("<option></option>")
+                                .attr("value", result[i].id)
+                                .text(result[i].name)
+                            );
+                        }
+                        $('#genre-selection').val($("#Artwork_GenreId").val());
+                    }
+                });
+            }
+
+            function getMediums() {
+                $.ajax({
+                    method: "GET",
+                    url: "/api/mediums/",
+
+                    success: function (result) {
+                        for (var i in result) {
+                            $('#medium-selection').append($("<option></option>")
+                                .attr("value", result[i].id)
+                                .text(result[i].name)
+                            );
+                        }
+                            $('#medium-selection').val($("#Artwork_MediumId").val());
+                    }
+                });
+            }
+
+            function getArtists() {
+                $.ajax({
+                    method: "GET",
+                    url: "/api/artists/",
+
+                    success: function (result) {
+                        for (var i in result) {
+                            $('#artist-selection').append($("<option></option>")
+                                .attr("value", result[i].id)
+                                .text(result[i].firstName + " " + result[i].lastName)
+                            );
+                        }
+                            $('#artist-selection').val($("#Artwork_ArtistId").val());
+                    }
+                });
+            }
+        });
+    </script>
+}

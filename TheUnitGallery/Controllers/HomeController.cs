@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TheUnitGallery.Models;
 using TheUnitGallery.ViewModels;
+using System.Data.Entity;
 
 namespace TheUnitGallery.Controllers
 {
@@ -22,6 +23,10 @@ namespace TheUnitGallery.Controllers
 
             var viewModel = new HomepageViewModel
             {
+                Homepage = _context.Pages
+                .Include(p => p.Content)
+                .Single(p => p.Identifier == "homepage"),
+
                 Genres = _context.Genres
                 .Where(g => g.VisibleFrontEnd == true)
                 .OrderBy(g => g.Name)
@@ -34,8 +39,7 @@ namespace TheUnitGallery.Controllers
 
                 Artists = _context.Artists
                 .OrderBy(g => g.FirstName)
-                .ToList(),
-                
+                .ToList()
             };
 
             return View(viewModel);

@@ -1,0 +1,71 @@
+﻿@using TheUnitGallery.Models
+
+@{
+    ViewBag.Title = "Artwork Management";
+}
+
+<div class="row body-content">
+    @Html.Partial("_CMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h3>@ViewBag.Title</h3>
+        <hr />
+        <table class="table table-striped" id="artworks">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Status</th>
+                    <th>Upload Images</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#artworks").DataTable({
+                ajax: {
+                    url: "/api/artworks",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "title",
+                        render: function (data, type, artwork) {
+                            return "<a href='artworks/edit/" + artwork.id + "'>" + data + "</a>";
+                        }
+                    },
+                    {
+                        data: "artist",
+                        render: function (data, type, artist) {
+                            return data.firstName + " " + data.lastName;
+                        }
+                    },
+                    {
+                        data: "artworkStatus",
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<a href='artworks/uploadimage/" + data + "' class='btn btn-outline-primary'>Upload Image</a>";
+                        }
+                    },
+                ]
+
+
+            });
+        });
+
+    </script>
+}
+

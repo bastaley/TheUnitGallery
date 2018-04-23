@@ -9,7 +9,7 @@
     <div class="col-sm-12 col-md-6 z-forward">
         <div class="row">
             <div class="col-sm-12 sub-heading">
-                <h2>Modern Art At The Unit</h2>
+                <h2>@Model.Homepage.Title</h2>
             </div>
         </div>
         <div class="row no-gutters">
@@ -30,7 +30,10 @@
         <div class="row">
             <div class="col-sm-12 white-space">
                 <h2>About us...</h2>
-                @Html.Raw(Model.AboutUs.Content)
+                @if (Model.Homepage.Content.Content != null)
+                {
+                    @Html.Raw(Model.Homepage.Content.Content)
+                }
             </div>
         </div>
     </div>
@@ -48,8 +51,4 @@
     </div>
 </div>
 
-<div class="row content ads">
-    <div class="col-sm-12 col-md-6">
-        <p>Hi</p>
-    </div>
-</div>
+@{Html.RenderAction("Adstrip", "Footer", new { area = "", blockStripIdentifier = "Adstrip" });}

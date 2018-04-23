@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TheUnitGallery.Models.Blockstrips>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row body-content">
+    @Html.Partial("_CMSAdminNavPanel")
+    <div class="col-sm-9 col-md-10">
+        <h2>Block Strips</h2>
+        <hr />
+
+        <p>
+            @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-outline-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Identifier)
+                </th>
+                <th>
+                    Left Block
+                </th>
+                <th>
+                    Middle Block
+                </th>
+                <th>
+                    Right Block
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identifier)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeftContent.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiddleContent.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RightContent.Name)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class="btn btn-outline-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+            }
+
+        </table>
+        </div>
+    </div>

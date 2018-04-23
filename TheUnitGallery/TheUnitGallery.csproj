@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,10 +47,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.2.5\lib\net45\ImageResizer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -207,14 +212,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\CMS\CMSAreaRegistration.cs" />
+    <Compile Include="Areas\CMS\Controllers\ArtworksController.cs" />
+    <Compile Include="Areas\CMS\Controllers\BlocksController.cs" />
+    <Compile Include="Areas\CMS\Controllers\BlockstripsController.cs" />
     <Compile Include="Areas\CMS\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CMS\Controllers\MediumsController.cs" />
     <Compile Include="Areas\CMS\Controllers\GenresController.cs" />
+    <Compile Include="Areas\CMS\Controllers\PagesController.cs" />
+    <Compile Include="Areas\CMS\ViewModels\ArtworkFormViewModel.cs" />
     <Compile Include="Areas\IMS\Controllers\AddressesController.cs" />
     <Compile Include="Areas\IMS\Controllers\ArtistsController.cs" />
     <Compile Include="Areas\IMS\Controllers\ArtworksController.cs" />
     <Compile Include="Areas\IMS\Controllers\CustomersController.cs" />
     <Compile Include="Areas\IMS\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\IMS\Controllers\FooterController.cs" />
     <Compile Include="Areas\IMS\Controllers\OrdersController.cs" />
     <Compile Include="Areas\IMS\Controllers\StaffController.cs" />
     <Compile Include="Areas\IMS\IMSAreaRegistration.cs" />
@@ -225,6 +236,9 @@
     <Compile Include="Areas\IMS\ViewModels\CreateOrderViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="Areas\IMS\ViewModels\RemoveStaffViewModel.cs" />
+    <Compile Include="Controllers\ArtworkController.cs" />
+    <Compile Include="ImageHelper.cs" />
+    <Compile Include="ViewModels\UploadImageViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\AddressesController.cs" />
     <Compile Include="Controllers\API\ArtistsController.cs" />
@@ -235,6 +249,7 @@
     <Compile Include="Controllers\API\MediumsController.cs" />
     <Compile Include="Controllers\API\OrdersController.cs" />
     <Compile Include="Controllers\API\UsersController.cs" />
+    <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -329,13 +344,37 @@
     <Compile Include="Migrations\201804071559282_UpdateOrderStatusColumn.Designer.cs">
       <DependentUpon>201804071559282_UpdateOrderStatusColumn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804140830097_AddBlocksTableToDatabase.cs" />
-    <Compile Include="Migrations\201804140830097_AddBlocksTableToDatabase.Designer.cs">
-      <DependentUpon>201804140830097_AddBlocksTableToDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201804150959102_UpdateToCurrent.cs" />
+    <Compile Include="Migrations\201804150959102_UpdateToCurrent.Designer.cs">
+      <DependentUpon>201804150959102_UpdateToCurrent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804140833027_SeedAboutUsBlock.cs" />
-    <Compile Include="Migrations\201804140833027_SeedAboutUsBlock.Designer.cs">
-      <DependentUpon>201804140833027_SeedAboutUsBlock.cs</DependentUpon>
+    <Compile Include="Migrations\201804150959300_SeedBlocksAndHompage.cs" />
+    <Compile Include="Migrations\201804150959300_SeedBlocksAndHompage.Designer.cs">
+      <DependentUpon>201804150959300_SeedBlocksAndHompage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804151003085_SeedArtists.cs" />
+    <Compile Include="Migrations\201804151003085_SeedArtists.Designer.cs">
+      <DependentUpon>201804151003085_SeedArtists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804151005277_SeedGenres.cs" />
+    <Compile Include="Migrations\201804151005277_SeedGenres.Designer.cs">
+      <DependentUpon>201804151005277_SeedGenres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804151008110_SeedMediums.cs" />
+    <Compile Include="Migrations\201804151008110_SeedMediums.Designer.cs">
+      <DependentUpon>201804151008110_SeedMediums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804151114042_AddFooterTableToDatabase.cs" />
+    <Compile Include="Migrations\201804151114042_AddFooterTableToDatabase.Designer.cs">
+      <DependentUpon>201804151114042_AddFooterTableToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804151122594_ChangeFootersTabletoBlockStrips.cs" />
+    <Compile Include="Migrations\201804151122594_ChangeFootersTabletoBlockStrips.Designer.cs">
+      <DependentUpon>201804151122594_ChangeFootersTabletoBlockStrips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804151513515_AddImageLocationColunmToArtworkTable.cs" />
+    <Compile Include="Migrations\201804151513515_AddImageLocationColunmToArtworkTable.Designer.cs">
+      <DependentUpon>201804151513515_AddImageLocationColunmToArtworkTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -344,14 +383,16 @@
     <Compile Include="Models\ArtworkStatus.cs" />
     <Compile Include="Models\Block.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Blockstrips.cs" />
     <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\Homepage.cs" />
+    <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Interaction.cs" />
     <Compile Include="Models\Medium.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\HomepageViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -522,6 +563,9 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\images\Jcrop.gif" />
+    <Content Include="Content\jquery.Jcrop.css" />
+    <Content Include="Content\jquery.Jcrop.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -636,6 +680,8 @@
     <Content Include="Areas\IMS\Views\Shared\_HeaderPartial.cshtml" />
     <Content Include="Areas\IMS\Views\Customers\Index.cshtml" />
     <Content Include="Areas\IMS\Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Scripts\jquery.Jcrop.js" />
+    <Content Include="Scripts\jquery.Jcrop.min.js" />
     <Content Include="Scripts\mainnav.slideout.js" />
     <Content Include="Scripts\header.dropdown.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
@@ -669,6 +715,22 @@
     <Content Include="Areas\CMS\Views\Shared\_HeaderPartial.cshtml" />
     <Content Include="Areas\CMS\Views\Genres\Index.cshtml" />
     <Content Include="Areas\CMS\Views\Mediums\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Pages\Create.cshtml" />
+    <Content Include="Areas\CMS\Views\Pages\Delete.cshtml" />
+    <Content Include="Areas\CMS\Views\Pages\Details.cshtml" />
+    <Content Include="Areas\CMS\Views\Pages\Edit.cshtml" />
+    <Content Include="Areas\CMS\Views\Pages\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Blocks\Create.cshtml" />
+    <Content Include="Areas\CMS\Views\Blocks\Delete.cshtml" />
+    <Content Include="Areas\CMS\Views\Blocks\Edit.cshtml" />
+    <Content Include="Areas\CMS\Views\Blocks\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Blockstrips\Create.cshtml" />
+    <Content Include="Areas\CMS\Views\Blockstrips\Delete.cshtml" />
+    <Content Include="Areas\CMS\Views\Blockstrips\Edit.cshtml" />
+    <Content Include="Areas\CMS\Views\Blockstrips\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Artworks\ArtworkForm.cshtml" />
+    <Content Include="Areas\CMS\Views\Artworks\Index.cshtml" />
+    <Content Include="Areas\CMS\Views\Artworks\UploadImage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -692,6 +754,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Uploads\Artwork\wallpaper-1638535_960_720.jpg" />
+    <Content Include="Uploads\Artwork\woman-3191096_960_720.jpg" />
     <Content Include="Uploads\default\placeholder.jpg" />
     <Content Include="Uploads\default\theunit.jpg" />
     <Content Include="Web.config" />
@@ -738,15 +802,19 @@
     <Content Include="Views\Shared\_ManageAccountPartial.cshtml" />
     <Content Include="Views\Shared\_StaffDropdownPartial.cshtml" />
     <Content Include="Views\Shared\_HeaderPartial.cshtml" />
-    <Content Include="Views\Shared\_FooterPartial.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\_AccountDropdownPartial.cshtml" />
     <Content Include="Views\Shared\_SearchBarDropdownPartial.cshtml" />
     <Content Include="Views\Shared\_NavigationSliderPartial.cshtml" />
+    <Content Include="Views\Shared\Adstrip.cshtml" />
+    <Content Include="Views\Genres\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\CMS\Models\" />
     <Folder Include="Areas\IMS\Models\" />
+    <Folder Include="Areas\IMS\Views\Footer\" />
+    <Folder Include="Views\Artwork\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
@@ -819,11 +887,29 @@
     <EmbeddedResource Include="Migrations\201804071559282_UpdateOrderStatusColumn.resx">
       <DependentUpon>201804071559282_UpdateOrderStatusColumn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804140830097_AddBlocksTableToDatabase.resx">
-      <DependentUpon>201804140830097_AddBlocksTableToDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804150959102_UpdateToCurrent.resx">
+      <DependentUpon>201804150959102_UpdateToCurrent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804140833027_SeedAboutUsBlock.resx">
-      <DependentUpon>201804140833027_SeedAboutUsBlock.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804150959300_SeedBlocksAndHompage.resx">
+      <DependentUpon>201804150959300_SeedBlocksAndHompage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151003085_SeedArtists.resx">
+      <DependentUpon>201804151003085_SeedArtists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151005277_SeedGenres.resx">
+      <DependentUpon>201804151005277_SeedGenres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151008110_SeedMediums.resx">
+      <DependentUpon>201804151008110_SeedMediums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151114042_AddFooterTableToDatabase.resx">
+      <DependentUpon>201804151114042_AddFooterTableToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151122594_ChangeFootersTabletoBlockStrips.resx">
+      <DependentUpon>201804151122594_ChangeFootersTabletoBlockStrips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151513515_AddImageLocationColunmToArtworkTable.resx">
+      <DependentUpon>201804151513515_AddImageLocationColunmToArtworkTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

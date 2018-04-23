@@ -16,7 +16,7 @@
 
         @RenderBody()
 
-        @Html.Partial("_FooterPartial")
+        @{Html.RenderAction("Footer", "Footer", new { area = "", footerIdentifier = "Footer" });}
 
         @Scripts.Render("~/bundles/lib")
         @Scripts.Render("~/bundles/dropdowns")

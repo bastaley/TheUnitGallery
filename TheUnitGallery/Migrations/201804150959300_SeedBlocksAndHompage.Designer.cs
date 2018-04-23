@@ -7,13 +7,13 @@ namespace TheUnitGallery.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddBlocksTableToDatabase : IMigrationMetadata
+    public sealed partial class SeedBlocksAndHompage : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddBlocksTableToDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedBlocksAndHompage));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804140830097_AddBlocksTableToDatabase"; }
+            get { return "201804150959300_SeedBlocksAndHompage"; }
         }
         
         string IMigrationMetadata.Source
