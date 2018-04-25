@@ -6,38 +6,52 @@ using System.Web.Mvc;
 using TheUnitGallery.Models;
 using TheUnitGallery.ViewModels;
 using System.Data.Entity;
+using TheUnitGallery.Models.Interfaces;
 
 namespace TheUnitGallery.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
+        private IPageRepository _pageRepo;
+        private IGenreRepository _genreRepo;
+        private IMediumRepository _mediumRepo;
+        private IArtistRepository _artistRepo;
 
         public HomeController()
         {
-            _context = new ApplicationDbContext();
+            this._pageRepo = new EFPageRepository();
+            this._genreRepo = new EFGenreRepository();
+            this._mediumRepo = new EFMediumRepository();
+            this._artistRepo = new EFArtistRepository();
         }
 
-        public ActionResult Index()
+        public HomeController(IPageRepository pageRepo, IGenreRepository genreRepo, IMediumRepository mediumRepo, IArtistRepository artistRepo)
         {
+            this._pageRepo = pageRepo;
+            this._genreRepo = genreRepo;
+            this._mediumRepo = mediumRepo;
+            this._artistRepo = artistRepo;
+        }
 
+        public ViewResult Index()
+        {
             var viewModel = new HomepageViewModel
             {
-                Homepage = _context.Pages
+                Homepage = _pageRepo.Pages
                 .Include(p => p.Content)
                 .Single(p => p.Identifier == "homepage"),
 
-                Genres = _context.Genres
+                Genres = _genreRepo.Genres
                 .Where(g => g.VisibleFrontEnd == true)
                 .OrderBy(g => g.Name)
                 .ToList(),
 
-                Mediums = _context.Mediums
+                Mediums = _mediumRepo.Mediums
                 .Where(g => g.VisibleFrontEnd == true)
                 .OrderBy(g => g.Name)
                 .ToList(),
 
-                Artists = _context.Artists
+                Artists = _artistRepo.Artists
                 .OrderBy(g => g.FirstName)
                 .ToList()
             };
@@ -46,3 +60,5 @@ namespace TheUnitGallery.Controllers
         }
     }
 }
+
+

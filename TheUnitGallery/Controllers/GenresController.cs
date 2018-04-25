@@ -21,6 +21,11 @@ namespace TheUnitGallery.Controllers
         // GET: Genres/Lacdscape
         public ActionResult Index(string genreName)
         {
+            if(string.IsNullOrWhiteSpace(genreName))
+            {
+                return HttpNotFound();
+            }
+
             var artworks = _context.Artworks
                 .Include(a => a.Artist)
                 .Include(a => a.Medium)
@@ -29,13 +34,18 @@ namespace TheUnitGallery.Controllers
                 .Where(a => a.ArtworkStatus == ArtworkStatus.ForSale)
                 .ToList();
 
-            var viewModel = new CategoryViewModel
+            if(artworks != null)
             {
-                Title = genreName,
-                Artworks = artworks
-            };
+                var viewModel = new CategoryViewModel
+                {
+                    Title = genreName,
+                    Artworks = artworks
+                };
 
-            return View(viewModel);
+                return View(viewModel);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
